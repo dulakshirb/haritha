@@ -1,4 +1,4 @@
-package com.dulakshi.haritha_farmer;
+package com.haritha.haritha_farmer;
 
 import android.content.Context;
 

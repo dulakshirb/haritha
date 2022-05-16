@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.dulakshi.haritha_farmer"
+        applicationId "com.haritha.haritha_farmer"
         minSdk 24
         targetSdk 32
         versionCode 1
