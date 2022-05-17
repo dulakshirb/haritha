@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<!--    Custom Colors-->
+    <color name="h_gray">#6C6C6C</color>
+    <color name="h_light_gray">#ADADAD</color>
+    <color name="h_dark_green">#31A05F</color>
+    <color name="h_gradient_dark_green">#22A45D</color>
+    <color name="h_gradient_light_green">#87DC69</color>
+    <color name="h_orange">#EF9920</color>
+    <color name="h_red">#C8372D</color>
+    <color name="h_blue">#2264D1</color>
+    <color name="h_yellow">#D1941A</color>
+    <color name="h_warning_red">#EE1616</color>
 </resources>
