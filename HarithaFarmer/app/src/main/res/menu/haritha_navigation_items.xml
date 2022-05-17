@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_task_and_schedule"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="Task &amp; Schedule"/>
+
+    <item
+        android:id="@+id/nav_crops"
+        android:icon="@drawable/ic_icon_park_outline_sleaves"
+        android:title="Crops"/>
+
+    <item
+        android:id="@+id/nav_resources"
+        android:icon="@drawable/ic_mdi_tractor_variant"
+        android:title="Resources"/>
+
+    <item
+        android:id="@+id/nav_fertilizing"
+        android:icon="@drawable/ic_mdi_nutrition"
+        android:title="Fertilizing"/>
+
+    <item
+        android:id="@+id/nav_seeding"
+        android:icon="@drawable/ic_icon_park_hold_seeds"
+        android:title="Seeding"/>
+
+    <item
+        android:id="@+id/nav_predictive_analytics"
+        android:icon="@drawable/ic_carbon_agriculture_analytics"
+        android:title="Predictive Analytics"/>
+
+    <item
+        android:id="@+id/nav_security"
+        android:icon="@drawable/ic_carbon_gateway_security"
+        android:title="Security"/>
+
+    <item
+        android:id="@+id/nav_watering_and_soilHealth"
+        android:icon="@drawable/ic_carbon_temperature_water"
+        android:title="Watering &amp; Soil Health"/>
+
+    <item
+        android:id="@+id/nav_reports"
+        android:icon="@drawable/ic_iconoir_reports"
+        android:title="Reports"/>
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_ant_design_logout_outlined"
+        android:title="Logout"/>
+
+</menu>
