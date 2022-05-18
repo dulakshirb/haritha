@@ -14,7 +14,7 @@
         android:layout_marginRight="16dp"
         android:src="@drawable/pro_pic"
         app:civ_border_color="@color/h_orange"
-        app:civ_border_width="2dp"/>
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/txt_loggedin_username"
