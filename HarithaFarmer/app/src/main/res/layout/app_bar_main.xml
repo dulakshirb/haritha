@@ -17,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:popupTheme="@style/AppTheme.popUpOverlay"
-            app:layout_scrollFlags="scroll|enterAlways">
-
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="Haritha">
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
