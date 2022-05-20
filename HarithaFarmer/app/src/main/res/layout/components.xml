@@ -39,6 +39,15 @@
 
 <!--    </RelativeLayout>-->
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@drawable/button_green"
+        android:text="Add New"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_medium"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_green"
         android:layout_width="350dp"
