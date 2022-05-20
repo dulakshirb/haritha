@@ -24,11 +24,14 @@
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/menu_back.xml" value="0.2465" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/menu_back_state.xml" value="0.2465" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/menu_item_padding.xml" value="0.2465" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/rv_card_bg.xml" value="0.1985" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/rv_heading_text_bg.xml" value="0.1995" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/shadow_background.xml" value="0.3715" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/spinner_grey.xml" value="0.1965" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/activity_main.xml" value="0.2851851851851852" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/app_bar_main.xml" value="0.33" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/components.xml" value="0.25" />
-        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_crops.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_crops.xml" value="0.33" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_fertilizing.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_predictive_analytics.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_reports.xml" value="0.17447916666666666" />
@@ -40,6 +43,7 @@
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_task_and_schedule.xml" value="0.3671875" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_watering_and_soil_health.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/nav_header.xml" value="0.371875" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/single_crops_card.xml" value="0.1" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/menu/haritha_navigation_items.xml" value="0.371875" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/menu/toolbar_menu.xml" value="0.3578125" />
       </map>

@@ -21,4 +21,5 @@
     <color name="h_blue">#2264D1</color>
     <color name="h_yellow">#D1941A</color>
     <color name="h_warning_red">#EE1616</color>
+    <color name="h_shadow">#7090B033</color>
 </resources>
