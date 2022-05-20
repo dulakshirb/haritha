@@ -5,46 +5,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
+    android:padding="20dp"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/h_dark_green"
-        android:orientation="horizontal">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:background="@color/h_dark_green"-->
+<!--        android:orientation="horizontal">-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/pro_pic"
-            app:civ_border_color="@color/h_orange"
-            app:civ_border_width="2dp" />
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/img_profile"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:src="@drawable/pro_pic"-->
+<!--            app:civ_border_color="@color/h_orange"-->
+<!--            app:civ_border_width="2dp" />-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/back_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/back_button"
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/back_button"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:src="@drawable/back_button"-->
 
-            />
+<!--            />-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_green"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="14dp"
-        android:layout_marginRight="30dp"
         android:layout_marginBottom="14dp"
         android:background="@drawable/button_green"
         android:fontFamily="@font/poppins_semibold"
@@ -58,7 +57,6 @@
         android:id="@+id/button2"
         android:layout_width="140dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="14dp"
         android:background="@drawable/button_red"
@@ -72,8 +70,6 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="21dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginBottom="0dp"
         android:text="Name"
         android:textSize="14sp"
@@ -86,8 +82,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:ems="10"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginBottom="14dp"
         android:layout_marginTop="0dp"
         android:drawablePadding="14dp"
@@ -102,9 +96,7 @@
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="0dp"
-        android:layout_marginRight="20dp"
         android:layout_marginBottom="14dp"
         android:drawablePadding="14dp"
         android:background="@drawable/spinner_grey"
@@ -115,7 +107,6 @@
         android:id="@+id/headings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:textSize="26sp"
         android:fontFamily="@font/poppins_bold"
         android:textColor="@color/h_orange"
@@ -125,8 +116,6 @@
         android:id="@+id/subtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/h_gray"
