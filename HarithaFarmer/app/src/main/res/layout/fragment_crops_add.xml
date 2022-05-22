@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp"
+    tools:context=".CropsAddFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_heading_crops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Crops"
+            android:textColor="@color/h_orange"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_heading_typeVariety"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Type &amp; Variety"
+            android:textColor="@color/h_gray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_crops" />
+
+        <TextView
+            android:id="@+id/txt_heading_cropType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Crop Type"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_typeVariety" />
+
+        <Spinner
+            android:id="@+id/spinner_cropType"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_heading_cropType"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/crop_type"/>
+
+        <TextView
+            android:id="@+id/txt_heading_cropName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Name"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_cropType" />
+
+        <EditText
+            android:id="@+id/txt_cropName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="20dp"
+            android:inputType="text"
+            android:background="@drawable/edittext_grey"
+            android:textColor="@color/black"
+            android:hint="Crop Name"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_cropName" />
+
+        <TextView
+            android:id="@+id/txt_heading_variety"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Variety"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_cropName" />
+
+        <EditText
+            android:id="@+id/txt_variety"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="20dp"
+            android:inputType="text"
+            android:background="@drawable/edittext_grey"
+            android:textColor="@color/black"
+            android:hint="Ex: Lanka carrot"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_variety" />
+
+        <TextView
+            android:id="@+id/txt_heading_botanicalName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Botanical Name"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_variety" />
+
+        <EditText
+            android:id="@+id/txt_botanicalName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="20dp"
+            android:inputType="text"
+            android:background="@drawable/edittext_grey"
+            android:textColor="@color/black"
+            android:hint="Ex: Lanka carrot"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_botanicalName" />
+
+        <TextView
+            android:id="@+id/txt_heading_plantingDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Type &amp; Variety"
+            android:textColor="@color/h_gray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_botanicalName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
