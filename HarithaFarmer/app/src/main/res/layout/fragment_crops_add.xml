@@ -52,11 +52,11 @@
             android:id="@+id/spinner_cropType"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/crop_type"
             android:padding="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_heading_cropType"
-            android:background="@drawable/spinner_grey"
-            android:entries="@array/crop_type"/>
+            app:layout_constraintTop_toBottomOf="@id/txt_heading_cropType" />
 
         <TextView
             android:id="@+id/txt_heading_cropName"
@@ -74,11 +74,11 @@
             android:id="@+id/txt_cropName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:padding="20dp"
-            android:inputType="text"
             android:background="@drawable/edittext_grey"
-            android:textColor="@color/black"
             android:hint="Crop Name"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/h_light_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_heading_cropName" />
@@ -99,11 +99,11 @@
             android:id="@+id/txt_variety"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:padding="20dp"
-            android:inputType="text"
             android:background="@drawable/edittext_grey"
-            android:textColor="@color/black"
             android:hint="Ex: Lanka carrot"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/h_light_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_heading_variety" />
@@ -124,11 +124,11 @@
             android:id="@+id/txt_botanicalName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:padding="20dp"
-            android:inputType="text"
             android:background="@drawable/edittext_grey"
-            android:textColor="@color/black"
             android:hint="Ex: Lanka carrot"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/h_light_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_heading_botanicalName" />
@@ -139,12 +139,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="Type &amp; Variety"
+            android:text="Planting Details"
             android:textColor="@color/h_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_botanicalName" />
+
+        <TextView
+            android:id="@+id/txt_heading_plantedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Planted Date"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantingDetails" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/calendar_plantedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_gray"
+            android:padding="20dp"
+            android:text="Choose date"
+            android:textColor="@color/h_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantedDate" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
