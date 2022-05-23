@@ -15,4 +15,41 @@
         <item>Fruit</item>
         <item>Vegetable</item>
     </array>
+
+    <array name="crop_start_method">
+        <item>Bulbs</item>
+        <item>Container </item>
+        <item>Direct Sow</item>
+        <item>Grafting</item>
+        <item>Other</item>
+        <item>Root Stock</item>
+        <item>Start in Trays, Transplant in Ground</item>
+        <item>Transplant</item>
+    </array>
+
+    <array name="light_profile">
+        <item>Full Sun</item>
+        <item>Full to Part Sun</item>
+        <item>Partial Sun</item>
+        <item>Sun to Part Shade</item>
+        <item>Partial Shade</item>
+        <item>Full Shade</item>
+    </array>
+
+    <array name="harvest_unit">
+        <item>bales</item>
+        <item>barrels</item>
+        <item>bunches</item>
+        <item>bushels</item>
+        <item>dozen</item>
+        <item>grams</item>
+        <item>head</item>
+        <item>kilograms</item>
+        <item>kiloliter</item>
+        <item>liter</item>
+        <item>milliliter</item>
+        <item>quantity</item>
+        <item>tonnes</item>
+    </array>
+
 </resources>
