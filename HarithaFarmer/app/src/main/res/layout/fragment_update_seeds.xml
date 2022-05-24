@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VehicleAddFragment"
+    android:layout_margin="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="70dp">
+
+            <TextView
+                android:id="@+id/txt_heading_Seeds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Seeds"
+                android:textColor="@color/h_orange"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/txt_heading_seedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Name"
+                android:textColor="@color/h_light_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_Seeds" />
+
+            <EditText
+                android:id="@+id/txt_update_seedName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_grey"
+                android:hint="Enter seed Name"
+                android:inputType="text"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/h_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_seedName" />
+
+            <TextView
+                android:id="@+id/txt_heading_seedDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Description"
+                android:textColor="@color/h_light_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_seedName" />
+
+            <EditText
+                android:id="@+id/txt_update_seedDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/edittext_grey"
+                android:hint="Enter Description"
+                android:inputType="text|textMultiLine"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/h_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_seedDescription" />
+
+            <TextView
+                android:id="@+id/txt_heading_seedVariety"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Variety"
+                android:textColor="@color/h_light_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_seedDescription" />
+
+            <EditText
+                android:id="@+id/txt_update_seedVariety"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_grey"
+                android:hint="Enter the Variety"
+                android:inputType="text"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/h_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_seedVariety" />
+
+            <TextView
+                android:id="@+id/txt_heading_seedType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Seed Type"
+                android:textColor="@color/h_light_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_seedVariety" />
+
+            <EditText
+                android:id="@+id/txt_update_seedType"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_grey"
+                android:hint="Enter Seed Type"
+                android:inputType="text"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/h_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_seedType" />
+
+            <TextView
+                android:id="@+id/txt_heading_seedAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Amount"
+                android:textColor="@color/h_light_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_seedType" />
+
+            <EditText
+                android:id="@+id/txt_update_seedAmount"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_grey"
+                android:hint="0"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/h_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_seedAmount" />
+
+            <TextView
+                android:id="@+id/txt_heading_seedRestockAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Amount"
+                android:textColor="@color/h_light_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_seedAmount" />
+
+            <EditText
+                android:id="@+id/txt_update_seedRestockAmount"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_grey"
+                android:hint="0"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/h_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_heading_seedRestockAmount" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_seed_Update"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_green"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Update"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_seedRestockAmount"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</FrameLayout>

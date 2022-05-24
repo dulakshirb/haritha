@@ -12,6 +12,7 @@
     <color name="h_light_gray">#ADADAD</color>
     <color name="h_lightest_gray">#EFEFF0</color>
     <color name="h_dark_green">#31A05F</color>
+    <color name="h_light_green">#37C85E</color>
     <color name="h_gradient_dark_green">#22A45D</color>
     <color name="h_gradient_light_green">#87DC69</color>
     <color name="h_menu_selector">#EAF5EF</color>

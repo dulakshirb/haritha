@@ -18,7 +18,7 @@
 
     <array name="crop_start_method">
         <item>Bulbs</item>
-        <item>Container </item>
+        <item>Container</item>
         <item>Direct Sow</item>
         <item>Grafting</item>
         <item>Other</item>
