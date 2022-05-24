@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VehicleAddFragment"
+    android:layout_margin="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="70dp">
+
+        <TextView
+            android:id="@+id/txt_heading_fertilizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Fertilizer"
+            android:textColor="@color/h_orange"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/txt_heading_update_fertilizerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Name"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizer" />
+
+        <Spinner
+            android:id="@+id/spinner_update_fertilizerName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/fertilizer_name"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_update_fertilizerName" />
+
+
+        <TextView
+            android:id="@+id/txt_heading_update_fertilizerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Description"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_update_fertilizerName" />
+
+        <EditText
+            android:id="@+id/txt_update_fertilizerDescription"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="Enter Description"
+            android:inputType="text|textMultiLine"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_update_fertilizerDescription" />
+
+        <TextView
+            android:id="@+id/txt_heading_update_fertilizerCrops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Crops to Use"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_fertilizerDescription" />
+
+        <EditText
+            android:id="@+id/txt_update_fertilizerCrops"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="Crops1,Crops2,Crops3,...."
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_update_fertilizerCrops" />
+
+        <TextView
+            android:id="@+id/txt_heading_update_fertilizerAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Amount"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_fertilizerCrops" />
+
+        <EditText
+            android:id="@+id/txt_update_fertilizerAmount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="0"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_update_fertilizerAmount" />
+
+        <TextView
+            android:id="@+id/txt_heading_update_fertilizerRestockAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Restock Amount"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_fertilizerAmount" />
+
+
+        <EditText
+            android:id="@+id/txt_update_fertilizerRestockAmount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="0"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_update_fertilizerRestockAmount" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_fertilizer_update"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Update"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_fertilizerRestockAmount"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

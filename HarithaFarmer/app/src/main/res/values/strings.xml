@@ -52,4 +52,20 @@
         <item>tonnes</item>
     </array>
 
+    <array name="fertilizer_name">
+        <item>Urea (Granular/Prilled)</item>
+        <item>Triple Super Phosphate (TSP)</item>
+        <item>Muriate of Potash (MOP)</item>
+        <item>Sulphate of Ammonia (SOA)</item>
+        <item>Magnesium Sulphate Monohydrate (KIE)</item>
+        <item>Zinc Sulphate</item>
+        <item>Commercial Epsom Salt (CES)</item>
+        <item>Di Ammonium Phosphate (DAP)</item>
+        <item>Sulphate of Potash (SOP)</item>
+        <item>Borate</item>
+        <item>Dolomite</item>
+        <item>Rock Phosphate</item>
+        <item>Compost</item>
+    </array>
+
 </resources>

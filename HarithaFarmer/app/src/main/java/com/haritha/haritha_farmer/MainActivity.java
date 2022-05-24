@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         break;
                     case R.id.nav_resources:
+                        fragment = new ResourcesFragment();
+                        loadFragment(fragment);
                         break;
                     case R.id.nav_fertilizing:
                         break;

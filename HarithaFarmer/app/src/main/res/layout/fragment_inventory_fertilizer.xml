@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VehicleAddFragment"
+    android:layout_margin="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="70dp">
+
+        <TextView
+            android:id="@+id/txt_heading_fertilizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Fertilizer"
+            android:textColor="@color/h_orange"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/txt_heading_inventoryFertilizerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Name"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizer" />
+
+        <Spinner
+            android:id="@+id/spinner_inventoryFertilizerName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/fertilizer_name"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_inventoryFertilizerName" />
+
+
+        <TextView
+            android:id="@+id/txt_heading_fertilizerReceivedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Received Date"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_inventoryFertilizerName" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/calendar_fertilizerReceivedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_gray"
+            android:padding="20dp"
+            android:text="Choose date"
+            android:textColor="@color/h_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizerReceivedDate" />
+
+        <TextView
+            android:id="@+id/txt_heading_fertilizerExpireDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Expire Date"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendar_fertilizerReceivedDate" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/calendar_fertilizerExpireDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_gray"
+            android:padding="20dp"
+            android:text="Choose date"
+            android:textColor="@color/h_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizerExpireDate" />
+
+        <TextView
+            android:id="@+id/txt_heading_InventoryFertilizerAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Amount"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendar_fertilizerExpireDate" />
+
+        <EditText
+            android:id="@+id/txt_inventoryFertilizerAmount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="0"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_InventoryFertilizerAmount" />
+
+        <TextView
+            android:id="@+id/txt_heading_inventoryFertilizerCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Cost"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_inventoryFertilizerAmount" />
+
+
+        <EditText
+            android:id="@+id/txt_inventoryFertilizerCost"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="0"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_inventoryFertilizerCost" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_inventory_fertilizer_save"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_inventoryFertilizerCost"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
