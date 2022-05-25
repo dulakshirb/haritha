@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_reports:
                         break;
-                    case R.id.nav_settings:
+                    case R.id.nav_profile:
                         break;
                     case R.id.nav_support:
                         break;

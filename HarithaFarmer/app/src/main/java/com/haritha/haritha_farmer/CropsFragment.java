@@ -51,7 +51,7 @@ public class CropsFragment extends Fragment {
         });
 
         //db query
-        dbref = FirebaseDatabase.getInstance().getReference("Farmer").child("crops");
+        dbref = FirebaseDatabase.getInstance().getReference("Farmer").child("Crops");
         //crops recycleView
         cropsList = (RecyclerView) view.findViewById(R.id.rv_crops);
         cropsList.setLayoutManager(new LinearLayoutManager(getContext()));
