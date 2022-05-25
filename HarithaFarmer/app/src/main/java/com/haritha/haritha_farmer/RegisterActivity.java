@@ -23,10 +23,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText userEmail, userPassword;
     private Button btnRegister;
     private TextView alreadyHaveanAccountLink;
+    private ProgressDialog loadingBar;
 
     private FirebaseAuth mAuth;
-
-    private ProgressDialog loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
