@@ -130,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/edittext_grey"
-                android:hint="Ex: Lanka carrot"
+                android:hint="Ex: Daucus carota"
                 android:inputType="text"
                 android:padding="20dp"
                 android:textColor="@color/black"
@@ -191,8 +191,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/edittext_grey"
-                android:hint="cm"
-                android:inputType="numberDecimal"
+                android:hint="Days"
+                android:inputType="number"
                 android:padding="20dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/h_light_gray"
@@ -242,7 +242,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/edittext_grey"
                 android:hint="cm"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:padding="20dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/h_light_gray"
@@ -400,7 +400,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/edittext_grey"
-                android:hint="cm"
+                android:hint="Days"
                 android:inputType="number"
                 android:padding="20dp"
                 android:textColor="@color/black"
@@ -480,6 +480,19 @@
                 android:textColorHint="@color/h_light_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_heading_expectedYield" />
+
+            <Button
+                android:id="@+id/btn_saveCrop"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_green"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_expectedYield" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
