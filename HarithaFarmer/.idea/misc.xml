@@ -32,15 +32,16 @@
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/rv_heading_text_bg.xml" value="0.1995" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/shadow_background.xml" value="0.3715" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/drawable/spinner_grey.xml" value="0.1965" />
-        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/activity_login.xml" value="0.22703313253012047" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/activity_main.xml" value="0.2851851851851852" />
-        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/activity_register.xml" value="0.27334542157751585" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/activity_register.xml" value="0.33587462939432444" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/app_bar_main.xml" value="0.33" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/components.xml" value="0.25" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_crops.xml" value="0.33" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_crops_add.xml" value="0.25" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_fertilizing.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_predictive_analytics.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_profile.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_reports.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_resources.xml" value="0.25" />
         <entry key="..\:/Users/Dulakshi/Desktop/haritha/HarithaFarmer/app/src/main/res/layout/fragment_security.xml" value="0.18854166666666666" />
@@ -65,5 +66,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33587462939432444" />
+      </ProjectState>
+    </option>
   </component>
 </project>
