@@ -77,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_support:
                         break;
                     case R.id.nav_logout:
+                        if (item.getItemId() == R.id.nav_logout) {
+                            mAuth.signOut();
+                            sendUsertoLoginActivity();
+                        }
                         break;
                     default:
                         return true;

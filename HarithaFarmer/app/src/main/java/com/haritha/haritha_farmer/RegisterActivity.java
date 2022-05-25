@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createNewUserAccount() {
         String email = userEmail.getText().toString().trim();
-        String password = userEmail.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
             userEmail.setError("This field is required");

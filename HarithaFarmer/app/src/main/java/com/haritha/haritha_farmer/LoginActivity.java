@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgetPasswordLink, newUserRegisterLink;
     private ProgressDialog loadingBar;
 
-    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
 
     @Override
@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
 
         initializeField();
 
@@ -57,8 +56,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void allowUserToLogin() {
-        String email = loginEmail.getText().toString().trim();
-        String password = loginPassword.getText().toString().trim();
+        String email = loginEmail.getText().toString();
+        String password = loginPassword.getText().toString();
+
+        System.out.println(email);
+        System.out.println(password);
 
         if (TextUtils.isEmpty(email)) {
             loginEmail.setError("This field is required");
@@ -79,12 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         sendUsertoMainActivity();
                         Toast.makeText(LoginActivity.this, "Logged in Successful..", Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
                     } else {
                         String message = task.getException().toString();
-                        Toast.makeText(LoginActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
+                        System.out.println("Error : " + message);
+                        Toast.makeText(LoginActivity.this, "Failed to login..", Toast.LENGTH_SHORT).show();
                     }
+                    loadingBar.dismiss();
                 }
             });
         }
@@ -98,15 +100,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btn_login);
 
         loadingBar = new ProgressDialog(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (currentUser != null) {
-            sendUsertoMainActivity();
-        }
     }
 
     private void sendUsertoMainActivity() {
