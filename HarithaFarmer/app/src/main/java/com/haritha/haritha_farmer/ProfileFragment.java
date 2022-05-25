@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -45,6 +49,8 @@ public class ProfileFragment extends Fragment {
         rootRef = FirebaseDatabase.getInstance().getReference();
 
         initializeFields();
+
+        retrieveProfileInfo();
 
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +89,10 @@ public class ProfileFragment extends Fragment {
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 sendUsertoMainActivity();
                                 Toast.makeText(getActivity(), "Profile updated successfully...", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
+                            } else {
                                 String message = task.getException().toString();
                                 System.out.println(message);
                                 Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
@@ -95,6 +100,33 @@ public class ProfileFragment extends Fragment {
                         }
                     });
         }
+    }
+
+    private void retrieveProfileInfo() {
+        rootRef.child("Farmer").child("Users").child(currentUserId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if ((snapshot.exists()) && (snapshot.hasChild("farmName") && snapshot.hasChild("profileImage"))) {
+                            String retFarmName = snapshot.child("farmName").getValue().toString();
+                            String retUserName = snapshot.child("userName").getValue().toString();
+                            String retProfileImage = snapshot.child("profileImage").getValue().toString();
+                            farmName.setText(retFarmName);
+                            userName.setText(retUserName);
+                        } else if ((snapshot.exists()) && (snapshot.hasChild("farmName"))) {
+                            String retFarmName = snapshot.child("farmName").getValue().toString();
+                            String retUserName = snapshot.child("userName").getValue().toString();
+                            farmName.setText(retFarmName);
+                            userName.setText(retUserName);
+                        } else {
+                            Toast.makeText(getActivity(), "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
     }
 
     private void sendUsertoMainActivity() {

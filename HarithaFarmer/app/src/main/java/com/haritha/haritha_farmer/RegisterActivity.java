@@ -76,10 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-
                         String currentUserId = mAuth.getCurrentUser().getUid();
                         rootRef.child("Farmer").child("Users").child(currentUserId).setValue("");
-
                         sendUsertoMainActivity();
                         Toast.makeText(RegisterActivity.this, "Account Create Successfully.", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
