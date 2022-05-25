@@ -110,7 +110,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/login_link"
+                android:id="@+id/already_have_an_account_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/already_have_an_account"
