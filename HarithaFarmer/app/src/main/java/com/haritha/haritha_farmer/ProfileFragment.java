@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +35,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +48,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -58,6 +63,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView profileImage;
     private EditText farmName, userName;
     private Button btnUpdateProfile;
+    private ProgressDialog loadingBar;
 
     private String currentUserId;
     private FirebaseAuth mAuth;
@@ -84,16 +90,64 @@ public class ProfileFragment extends Fragment {
             public void onActivityResult(Uri result) {
                 profileImage.setImageURI(result);
 
+                loadingBar.setTitle("Set Profile Image");
+                loadingBar.setMessage("Please wait, your profile image is uploading...");
+                loadingBar.setCanceledOnTouchOutside(true);
+                loadingBar.show();
+
                 StorageReference filePath = userProfileImagesRef.child(currentUserId + ".jpg");
-                filePath.putFile(result).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+/*                filePath.putFile(result).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(getActivity(), "Profile Image Uploaded Successfully..", Toast.LENGTH_SHORT).show();
-                        }else {
+                            String downloadedUrl = task.getResult().getDownloadUrl.toString();
+                            Log.d("url", downloadedUrl);
+                            rootRef.child("Farmer").child("Users").child(currentUserId).child("image").setValue(downloadedUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getActivity(), "Image save in database successfully.", Toast.LENGTH_SHORT).show();
+                                        loadingBar.dismiss();
+                                    } else {
+                                        String message = task.getException().toString();
+                                        Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                                        loadingBar.dismiss();
+                                    }
+                                }
+                            });
+                        } else {
                             String message = task.getException().toString();
                             Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
                         }
+                    }
+                });*/
+                filePath.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(getActivity(), "Profile Image Uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                        final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                        firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                final String downloadUrl = uri.toString();
+                                rootRef.child("Farmer").child("Users").child(currentUserId).child("image").setValue(downloadUrl)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(getActivity(), "Image save in database successfully.", Toast.LENGTH_SHORT).show();
+                                                    loadingBar.dismiss();
+                                                } else {
+                                                    String message = task.getException().toString();
+                                                    Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                                                    loadingBar.dismiss();
+                                                }
+                                            }
+                                        });
+                            }
+                        });
                     }
                 });
             }
@@ -124,6 +178,8 @@ public class ProfileFragment extends Fragment {
         farmName = (EditText) view.findViewById(R.id.set_farm_name);
         userName = (EditText) view.findViewById(R.id.set_user_name);
         btnUpdateProfile = (Button) view.findViewById(R.id.update_profile_button);
+
+        loadingBar = new ProgressDialog(getActivity());
     }
 
     private void updateProfile() {
@@ -164,12 +220,15 @@ public class ProfileFragment extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if ((snapshot.exists()) && (snapshot.hasChild("farmName") && snapshot.hasChild("profileImage"))) {
+                        if ((snapshot.exists()) && (snapshot.hasChild("farmName") && snapshot.hasChild("image"))) {
                             String retFarmName = snapshot.child("farmName").getValue().toString();
                             String retUserName = snapshot.child("userName").getValue().toString();
-                            String retProfileImage = snapshot.child("profileImage").getValue().toString();
+                            String retProfileImage = snapshot.child("image").getValue().toString();
                             farmName.setText(retFarmName);
                             userName.setText(retUserName);
+                            System.out.println(retProfileImage);
+                            Picasso.get().load(retProfileImage).into(profileImage);
+                            //Glide.with(ProfileFragment.this).load(retProfileImage).into(profileImage);
                         } else if ((snapshot.exists()) && (snapshot.hasChild("farmName"))) {
                             String retFarmName = snapshot.child("farmName").getValue().toString();
                             String retUserName = snapshot.child("userName").getValue().toString();
