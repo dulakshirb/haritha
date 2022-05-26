@@ -1,18 +1,36 @@
 package com.haritha.haritha_farmer;
 
+import static android.app.Activity.RESULT_FIRST_USER;
+import static android.app.Activity.RESULT_OK;
+
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,8 +41,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.HashMap;
+
+import javax.xml.transform.Result;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,10 +58,16 @@ public class ProfileFragment extends Fragment {
     private CircleImageView profileImage;
     private EditText farmName, userName;
     private Button btnUpdateProfile;
-    private String currentUserId;
 
+    private String currentUserId;
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
+    private StorageReference userProfileImagesRef;
+
+    ActivityResultLauncher<String> activityResultLauncher;
+
+    public ProfileFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +77,37 @@ public class ProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         rootRef = FirebaseDatabase.getInstance().getReference();
+        userProfileImagesRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                profileImage.setImageURI(result);
+
+                StorageReference filePath = userProfileImagesRef.child(currentUserId + ".jpg");
+                filePath.putFile(result).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getActivity(), "Profile Image Uploaded Successfully..", Toast.LENGTH_SHORT).show();
+                        }else {
+                            String message = task.getException().toString();
+                            Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
 
         initializeFields();
-
         retrieveProfileInfo();
+
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityResultLauncher.launch("image/*");
+            }
+        });
 
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
