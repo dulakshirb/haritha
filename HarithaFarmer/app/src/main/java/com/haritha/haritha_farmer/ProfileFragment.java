@@ -35,7 +35,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -96,33 +95,6 @@ public class ProfileFragment extends Fragment {
                 loadingBar.show();
 
                 StorageReference filePath = userProfileImagesRef.child(currentUserId + ".jpg");
-/*                filePath.putFile(result).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getActivity(), "Profile Image Uploaded Successfully..", Toast.LENGTH_SHORT).show();
-                            String downloadedUrl = task.getResult().getDownloadUrl.toString();
-                            Log.d("url", downloadedUrl);
-                            rootRef.child("Farmer").child("Users").child(currentUserId).child("image").setValue(downloadedUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getActivity(), "Image save in database successfully.", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    } else {
-                                        String message = task.getException().toString();
-                                        Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    }
-                                }
-                            });
-                        } else {
-                            String message = task.getException().toString();
-                            Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
-                        }
-                    }
-                });*/
                 filePath.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

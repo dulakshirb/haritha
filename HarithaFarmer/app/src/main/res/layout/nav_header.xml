@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_header_details"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:background="@color/h_dark_green"
@@ -8,7 +9,7 @@
     android:paddingRight="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_profile"
+        android:id="@+id/img_loggedin_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/img_profile"
+        android:layout_toEndOf="@+id/img_loggedin_profile"
         android:layout_marginLeft="20dp"
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical">
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="John Doe"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="16dp" />
 
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_loggedin_username"
             android:fontFamily="@font/poppins_regular"
-            android:text="johndoe@gmail.com"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="14dp" />
 

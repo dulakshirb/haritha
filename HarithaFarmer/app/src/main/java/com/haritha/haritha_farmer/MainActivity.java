@@ -13,8 +13,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,12 +26,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle toggle;
-    Toolbar toolbar;
-    NavigationView navigationView;
+    private View navHeaderView;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+
+    private TextView loggedInUserName, loggedInUserEmail;
+    private CircleImageView loggedInUserProfileImage;
 
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
@@ -50,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navHeaderView = navigationView.getHeaderView(0);
+        loggedInUserName = (TextView)navHeaderView.findViewById(R.id.txt_loggedin_username);
+        loggedInUserEmail = (TextView)navHeaderView.findViewById(R.id.txt_loggedin_email);
+        loggedInUserProfileImage = (CircleImageView)navHeaderView.findViewById(R.id.img_loggedin_profile);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -99,6 +114,30 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //retrieve logged in user details
+        retrieveLoggedInUserInfo();
+    }
+
+    private void retrieveLoggedInUserInfo() {
+        rootRef.child("Farmer").child("Users").child(currentUser.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            String retLoggedInUserName = snapshot.child("farmName").getValue().toString();
+                            String retLoggedInUserProfileImage = snapshot.child("image").getValue().toString();
+                            loggedInUserEmail.setText(currentUser.getEmail());
+                            loggedInUserName.setText(retLoggedInUserName);
+                            Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void loadFragment(Fragment fragment) {

@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,75 +39,37 @@ import java.util.List;
 
 public class CropsAddFragment extends Fragment {
 
+    private View view;
     private AppCompatButton plantedDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private EditText cropName, variety, botanicalName, daysToEmerge, plantSpacing, rowSpacing, plantingDepth, plantingDetails, daysToMaturity, harvestWindow, estimatedRevenue, expectedYield;
     private Spinner cropType, startMethod, lightProfile, harvestUnit;
-    private Button saveCrop;
-    private String planteddate, today, crop_type, crop_name, planted_date, crop_variety, botanical_name, start_method, light_profile, planting_details, harvest_unit;
+    private Button btnAddCrop;
+    private String planteddate, today, crop_type, crop_name, planted_date, crop_variety, botanical_name, start_method, light_profile, planting_details, harvest_unit, currentUserId;
     private int days_to_emerge, days_to_maturity, harvest_window;
     private Float plant_spacing, row_spacing, planting_depth, estimated_revenue, expected_yield;
 
-    DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
+    DatabaseReference rootRef;
     Crops crops;
+
+    public CropsAddFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_crops_add, container, false);
+        view = inflater.inflate(R.layout.fragment_crops_add, container, false);
 
-        plantedDate = (AppCompatButton) view.findViewById(R.id.calendar_plantedDate);
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
-        today = mdformat.format(calendar.getTime());
-        plantedDate.setText(today);
-
-        plantedDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, dateSetListener, year, month, day);
-                datePickerDialog.show();
-            }
-        });
-
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSer: yyyy-mm-dd: " + year + "/" + month + "/" + day);
-                planteddate = year + "-" + month + "-" + day;
-                plantedDate.setText(planteddate);
-            }
-        };
-
-        cropName = (EditText) view.findViewById(R.id.txt_cropName);
-        variety = (EditText) view.findViewById(R.id.txt_variety);
-        botanicalName = (EditText) view.findViewById(R.id.txt_botanicalName);
-        daysToEmerge = (EditText) view.findViewById(R.id.txt_daysToEmerge);
-        plantSpacing = (EditText) view.findViewById(R.id.txt_plantSpacing);
-        rowSpacing = (EditText) view.findViewById(R.id.txt_rowSpacing);
-        plantingDepth = (EditText) view.findViewById(R.id.txt_plantingDepth);
-        plantingDetails = (EditText) view.findViewById(R.id.txt_plantingDetails);
-        daysToMaturity = (EditText) view.findViewById(R.id.txt_daysToMaturity);
-        harvestWindow = (EditText) view.findViewById(R.id.txt_harvestWindow);
-        estimatedRevenue = (EditText) view.findViewById(R.id.txt_estimatedRevenue);
-        expectedYield = (EditText) view.findViewById(R.id.txt_expectedYield);
-        cropType = (Spinner) view.findViewById(R.id.spinner_cropType);
-        startMethod = (Spinner) view.findViewById(R.id.spinner_startMethod);
-        lightProfile = (Spinner) view.findViewById(R.id.spinner_lightProfile);
-        harvestUnit = (Spinner) view.findViewById(R.id.spinner_harvestUnit);
-        saveCrop = (Button) view.findViewById(R.id.btn_saveCrop);
-
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        rootRef = FirebaseDatabase.getInstance().getReference();
         crops = new Crops();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Farmer").child("crops");
+        //databaseReference = FirebaseDatabase.getInstance().getReference("Farmer").child("Crops");
 
-        saveCrop.setOnClickListener(new View.OnClickListener() {
+        selectPlantedDate();
+        initializeFields();
+
+        /*saveCrop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(cropName.getText().toString().trim())) {
@@ -117,13 +80,22 @@ public class CropsAddFragment extends Fragment {
                     databaseReference.push().setValue(crops);
                 }
             }
+        });*/
+
+        btnAddCrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCrop();
+            }
         });
+
+
 
         return view;
     }
 
-    private void setFieldValues() {
-        fieldValidation();
+    private void addCrop() {
+        //set values
         crops.setCropType(crop_type);
         crops.setCropName(crop_name);
         crops.setVariety(crop_variety);
@@ -141,6 +113,32 @@ public class CropsAddFragment extends Fragment {
         crops.setHarvestUnit(harvest_unit);
         crops.setEstimatedRevenue(estimated_revenue);
         crops.setExpectedYield(expected_yield);
+
+
+    }
+
+    private void initializeFields(){
+        cropName = (EditText) view.findViewById(R.id.txt_cropName);
+        variety = (EditText) view.findViewById(R.id.txt_variety);
+        botanicalName = (EditText) view.findViewById(R.id.txt_botanicalName);
+        daysToEmerge = (EditText) view.findViewById(R.id.txt_daysToEmerge);
+        plantSpacing = (EditText) view.findViewById(R.id.txt_plantSpacing);
+        rowSpacing = (EditText) view.findViewById(R.id.txt_rowSpacing);
+        plantingDepth = (EditText) view.findViewById(R.id.txt_plantingDepth);
+        plantingDetails = (EditText) view.findViewById(R.id.txt_plantingDetails);
+        daysToMaturity = (EditText) view.findViewById(R.id.txt_daysToMaturity);
+        harvestWindow = (EditText) view.findViewById(R.id.txt_harvestWindow);
+        estimatedRevenue = (EditText) view.findViewById(R.id.txt_estimatedRevenue);
+        expectedYield = (EditText) view.findViewById(R.id.txt_expectedYield);
+        cropType = (Spinner) view.findViewById(R.id.spinner_cropType);
+        startMethod = (Spinner) view.findViewById(R.id.spinner_startMethod);
+        lightProfile = (Spinner) view.findViewById(R.id.spinner_lightProfile);
+        harvestUnit = (Spinner) view.findViewById(R.id.spinner_harvestUnit);
+        btnAddCrop = (Button) view.findViewById(R.id.btn_saveCrop);    }
+
+    private void setFieldValues() {
+        fieldValidation();
+
     }
 
     private void fieldValidation() {
@@ -227,5 +225,39 @@ public class CropsAddFragment extends Fragment {
             expected_yield = Float.parseFloat(expectedYield.getText().toString());
         } else
             expected_yield = Float.valueOf(0);
+    }
+
+    private void selectPlantedDate(){
+        //SetCurrentDateByDefault
+        plantedDate = (AppCompatButton) view.findViewById(R.id.calendar_plantedDate);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        today = dateFormat.format(calendar.getTime());
+        plantedDate.setText(today);
+
+        //open DatePickerDialog
+        plantedDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, dateSetListener, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+        //Set Selected Date
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSer: yyyy-mm-dd: " + year + "/" + month + "/" + day);
+                planteddate = year + "-" + month + "-" + day;
+                plantedDate.setText(planteddate);
+            }
+        };
     }
 }
