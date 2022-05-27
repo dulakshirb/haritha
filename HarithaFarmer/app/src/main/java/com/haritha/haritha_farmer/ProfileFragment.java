@@ -138,6 +138,7 @@ public class ProfileFragment extends Fragment {
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 updateProfile();
             }
         });
@@ -161,10 +162,12 @@ public class ProfileFragment extends Fragment {
         if (TextUtils.isEmpty(setFarmName)) {
             farmName.setError("Please write your farm name");
             farmName.requestFocus();
+            return;
         }
         if (TextUtils.isEmpty(setUserName)) {
             userName.setError("Please enter your name");
             userName.requestFocus();
+            return;
         } else {
             HashMap<String, String> profileMap = new HashMap<>();
             profileMap.put("userID", currentUserId);

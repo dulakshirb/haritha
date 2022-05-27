@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,494 +8,490 @@
     android:padding="20dp"
     tools:context=".CropsAddFragment">
 
-    <ScrollView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="70dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <TextView
+            android:id="@+id/txt_heading_crops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Crops"
+            android:textColor="@color/h_orange"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/txt_heading_typeVariety"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_heading_crops"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Type &amp; Variety"
+            android:textColor="@color/h_gray"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txt_heading_cropType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_heading_typeVariety"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Crop Type"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spinner_cropType"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="70dp">
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_cropType"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/crop_type"
+            android:padding="20dp" />
 
-            <TextView
-                android:id="@+id/txt_heading_crops"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Crops"
-                android:textColor="@color/h_orange"
-                android:textSize="26sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txt_heading_cropName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_cropType"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Name"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/txt_heading_typeVariety"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Type &amp; Variety"
-                android:textColor="@color/h_gray"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_crops" />
+        <EditText
+            android:id="@+id/txt_cropName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_cropName"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="Crop Name"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_cropType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Crop Type"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_typeVariety" />
+        <TextView
+            android:id="@+id/txt_heading_variety"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_cropName"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Variety"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/spinner_cropType"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/spinner_grey"
-                android:entries="@array/crop_type"
-                android:padding="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_heading_cropType" />
+        <EditText
+            android:id="@+id/txt_variety"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_variety"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="Ex: Lanka carrot"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_cropName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Name"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_cropType" />
+        <TextView
+            android:id="@+id/txt_heading_botanicalName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_variety"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Botanical Name"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/txt_cropName"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Crop Name"
-                android:inputType="text"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_cropName" />
+        <EditText
+            android:id="@+id/txt_botanicalName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_botanicalName"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="Ex: Daucus carota"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_variety"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Variety"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_cropName" />
+        <TextView
+            android:id="@+id/txt_heading_plantingDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_botanicalName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Planting Details"
+            android:textColor="@color/h_gray"
+            android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/txt_variety"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Ex: Lanka carrot"
-                android:inputType="text"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_variety" />
+        <TextView
+            android:id="@+id/txt_heading_plantedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_heading_plantingDetails"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Planted Date"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/txt_heading_botanicalName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Botanical Name"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_variety" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/calendar_plantedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_heading_plantedDate"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/button_gray"
+            android:padding="20dp"
+            android:text="Choose date"
+            android:textColor="@color/h_gray" />
 
-            <EditText
-                android:id="@+id/txt_botanicalName"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Ex: Daucus carota"
-                android:inputType="text"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_botanicalName" />
+        <TextView
+            android:id="@+id/txt_heading_daysToEmerge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/calendar_plantedDate"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Days to Emerge"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/txt_heading_plantingDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Planting Details"
-                android:textColor="@color/h_gray"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_botanicalName" />
+        <EditText
+            android:id="@+id/txt_daysToEmerge"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_daysToEmerge"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="Days"
+            android:inputType="number"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_plantedDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Planted Date"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantingDetails" />
+        <TextView
+            android:id="@+id/txt_heading_plantSpacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_daysToEmerge"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Plant Spacing"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/calendar_plantedDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_gray"
-                android:padding="20dp"
-                android:text="Choose date"
-                android:textColor="@color/h_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantedDate" />
+        <EditText
+            android:id="@+id/txt_plantSpacing"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_plantSpacing"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="cm"
+            android:inputType="numberDecimal"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_daysToEmerge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Days to Emerge"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendar_plantedDate" />
+        <TextView
+            android:id="@+id/txt_heading_rowSpacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_plantSpacing"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Row Spacing"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/txt_daysToEmerge"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Days"
-                android:inputType="number"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_daysToEmerge" />
+        <EditText
+            android:id="@+id/txt_rowSpacing"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_rowSpacing"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="cm"
+            android:inputType="numberDecimal"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_plantSpacing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Plant Spacing"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_daysToEmerge" />
+        <TextView
+            android:id="@+id/txt_heading_plantingDepth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_rowSpacing"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Planting Depth"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/txt_plantSpacing"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="cm"
-                android:inputType="numberDecimal"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantSpacing" />
+        <EditText
+            android:id="@+id/txt_plantingDepth"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_plantingDepth"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:hint="cm"
+            android:inputType="numberDecimal"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
 
-            <TextView
-                android:id="@+id/txt_heading_rowSpacing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Row Spacing"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_plantSpacing" />
+        <TextView
+            android:id="@+id/txt_heading_startMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_plantingDepth"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Start Method"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/txt_rowSpacing"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="cm"
-                android:inputType="numberDecimal"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_rowSpacing" />
+        <Spinner
+            android:id="@+id/spinner_startMethod"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_startMethod"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/crop_start_method"
+            android:padding="20dp"
+            android:spinnerMode="dialog" />
 
-            <TextView
-                android:id="@+id/txt_heading_plantingDepth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Planting Depth"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_rowSpacing" />
+        <TextView
+            android:id="@+id/txt_heading_lightProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Light Profile"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/spinner_startMethod"/>
 
-            <EditText
-                android:id="@+id/txt_plantingDepth"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="cm"
-                android:inputType="numberDecimal"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantingDepth" />
+        <Spinner
+            android:id="@+id/spinner_lightProfile"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/light_profile"
+            android:padding="20dp"
+            android:spinnerMode="dialog"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_lightProfile"/>
 
-            <TextView
-                android:id="@+id/txt_heading_startMethod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Start Method"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_plantingDepth" />
+        <TextView
+            android:id="@+id/txt_heading_plantingDetailsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Planting Details"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/spinner_lightProfile"/>
 
-            <Spinner
-                android:id="@+id/spinner_startMethod"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/spinner_grey"
-                android:entries="@array/crop_start_method"
-                android:padding="20dp"
-                android:spinnerMode="dialog"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_heading_startMethod" />
+        <EditText
+            android:id="@+id/txt_plantingDetails"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="Give details"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txt_heading_plantingDetailsText"/>
 
-            <TextView
-                android:id="@+id/txt_heading_lightProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Light Profile"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_startMethod" />
+        <TextView
+            android:id="@+id/txt_heading_harvestDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Harvest Details"
+            android:textColor="@color/h_gray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_plantingDetails"/>
 
-            <Spinner
-                android:id="@+id/spinner_lightProfile"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/spinner_grey"
-                android:entries="@array/light_profile"
-                android:padding="20dp"
-                android:spinnerMode="dialog"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_heading_lightProfile" />
+        <TextView
+            android:id="@+id/txt_heading_daysToMaturity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Days to Maturity"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_harvestDetails"/>
 
-            <TextView
-                android:id="@+id/txt_heading_plantingDetailsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Planting Details"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_lightProfile" />
+        <EditText
+            android:id="@+id/txt_daysToMaturity"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="Days"
+            android:inputType="number"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_daysToMaturity"/>
 
-            <EditText
-                android:id="@+id/txt_plantingDetails"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Give details"
-                android:inputType="text|textMultiLine"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_plantingDetailsText" />
+        <TextView
+            android:id="@+id/txt_heading_harvestWindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Harvest Window"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_daysToMaturity"/>
 
-            <TextView
-                android:id="@+id/txt_heading_harvestDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Harvest Details"
-                android:textColor="@color/h_gray"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_plantingDetails" />
+        <EditText
+            android:id="@+id/txt_harvestWindow"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="Days"
+            android:inputType="number"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_harvestWindow"/>
 
-            <TextView
-                android:id="@+id/txt_heading_daysToMaturity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Days to Maturity"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_harvestDetails" />
+        <TextView
+            android:id="@+id/txt_heading_harvestUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Harvest Unit"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_harvestWindow"/>
 
-            <EditText
-                android:id="@+id/txt_daysToMaturity"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Days"
-                android:inputType="number"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_daysToMaturity" />
+        <Spinner
+            android:id="@+id/spinner_harvestUnit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/harvest_unit"
+            android:padding="20dp"
+            android:spinnerMode="dialog"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_harvestUnit"/>
 
-            <TextView
-                android:id="@+id/txt_heading_harvestWindow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Harvest Window"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_daysToMaturity" />
+        <TextView
+            android:id="@+id/txt_heading_estimatedRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Estimated Revenue"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/spinner_harvestUnit"/>
 
-            <EditText
-                android:id="@+id/txt_harvestWindow"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="Days"
-                android:inputType="number"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_harvestWindow" />
+        <EditText
+            android:id="@+id/txt_estimatedRevenue"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="LKR (per harvest unit)"
+            android:inputType="numberDecimal"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_estimatedRevenue"/>
 
-            <TextView
-                android:id="@+id/txt_heading_harvestUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Harvest Unit"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_harvestWindow" />
+        <TextView
+            android:id="@+id/txt_heading_expectedYield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Expected Yield per 30.48m"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_estimatedRevenue"/>
 
-            <Spinner
-                android:id="@+id/spinner_harvestUnit"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/spinner_grey"
-                android:entries="@array/harvest_unit"
-                android:padding="20dp"
-                android:spinnerMode="dialog"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_heading_harvestUnit" />
+        <EditText
+            android:id="@+id/txt_expectedYield"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="per 30.48m"
+            android:inputType="numberDecimal"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_heading_expectedYield"/>
 
-            <TextView
-                android:id="@+id/txt_heading_estimatedRevenue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Estimated Revenue"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_harvestUnit" />
+        <Button
+            android:id="@+id/btn_saveCrop"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_expectedYield"/>
 
-            <EditText
-                android:id="@+id/txt_estimatedRevenue"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="LKR (per harvest unit)"
-                android:inputType="numberDecimal"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_estimatedRevenue" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/txt_heading_expectedYield"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Expected Yield per 30.48m"
-                android:textColor="@color/h_light_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_estimatedRevenue" />
 
-            <EditText
-                android:id="@+id/txt_expectedYield"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/edittext_grey"
-                android:hint="per 30.48m"
-                android:inputType="numberDecimal"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_heading_expectedYield" />
-
-            <Button
-                android:id="@+id/btn_saveCrop"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/button_green"
-                android:fontFamily="@font/poppins_semibold"
-                android:textAllCaps="false"
-                android:text="Save"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_expectedYield" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-</FrameLayout>
+</ScrollView>
