@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,10 +63,17 @@ public class RegisterActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email)) {
             userEmail.setError("This field is required");
             userEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            userEmail.setError("Please provide valid email!");
+            userEmail.requestFocus();
+            return;
         }
         if (TextUtils.isEmpty(password)) {
             userPassword.setError("This field is required");
             userPassword.requestFocus();
+            return;
         } else {
             loadingBar.setTitle("Creating New Account");
             loadingBar.setMessage("Please wait, while we are creating new account for you...");

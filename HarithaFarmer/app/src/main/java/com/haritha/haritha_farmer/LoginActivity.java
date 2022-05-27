@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void allowUserToLogin() {
-        String email = loginEmail.getText().toString();
-        String password = loginPassword.getText().toString();
+        String email = loginEmail.getText().toString().trim();
+        String password = loginPassword.getText().toString().trim();
 
         System.out.println(email);
         System.out.println(password);
@@ -72,10 +73,17 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email)) {
             loginEmail.setError("This field is required");
             loginEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            loginEmail.setError("Please provide valid email!");
+            loginEmail.requestFocus();
+            return;
         }
         if (TextUtils.isEmpty(password)) {
             loginPassword.setError("This field is required");
             loginPassword.requestFocus();
+            return;
         } else {
             loadingBar.setTitle("Sign In");
             loadingBar.setMessage("Please wait...");
