@@ -1,7 +1,6 @@
 package com.haritha.haritha_farmer;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,7 +12,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -114,30 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        //retrieve logged in user details
-        retrieveLoggedInUserInfo();
-    }
-
-    private void retrieveLoggedInUserInfo() {
-        rootRef.child("Farmer").child("Users").child(currentUser.getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            String retLoggedInUserName = snapshot.child("farmName").getValue().toString();
-                            String retLoggedInUserProfileImage = snapshot.child("image").getValue().toString();
-                            loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(retLoggedInUserName);
-                            Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
     }
 
     private void loadFragment(Fragment fragment) {
@@ -159,6 +131,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void retrieveLoggedInUserInfo() {
+        String currentUserId = mAuth.getCurrentUser().getUid();
+        rootRef.child("Farmer").child("Users").child(currentUserId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if ((snapshot.child("farmName").exists())) {
+                            String retLoggedInUserName = snapshot.child("farmName").getValue().toString();
+                            String retLoggedInUserProfileImage = snapshot.child("image").getValue().toString();
+                            loggedInUserEmail.setText(currentUser.getEmail());
+                            loggedInUserName.setText(retLoggedInUserName);
+                            Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
     private void verifyUserExistence() {
         String currentUserId = mAuth.getCurrentUser().getUid();
         rootRef.child("Farmer").child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
@@ -166,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if ((snapshot.child("farmName").exists())) {
                     //Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                    retrieveLoggedInUserInfo();
                 } else {
                     sendUsertoProfileFragment();
                 }
