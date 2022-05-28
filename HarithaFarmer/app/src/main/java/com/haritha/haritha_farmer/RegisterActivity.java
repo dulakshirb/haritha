@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,41 +62,59 @@ public class RegisterActivity extends AppCompatActivity {
         String password = userPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            userEmail.setError("This field is required");
+            userEmail.setError("Email is required!");
             userEmail.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            userEmail.setError("Please provide valid email!");
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            userEmail.setError("Please provide a valid email.");
             userEmail.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            userPassword.setError("This field is required");
+            userPassword.setError("Password is required");
             userPassword.requestFocus();
             return;
+        }
+        if (password.length() < 6) {{
+            userPassword.setError("Sorry, that password isn't right. Password must have at lease 8 characters.");
+        }
         } else {
             loadingBar.setTitle("Creating New Account");
             loadingBar.setMessage("Please wait, while we are creating new account for you...");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        String currentUserId = mAuth.getCurrentUser().getUid();
-                        rootRef.child("Farmer").child("Users").child(currentUserId).setValue("");
-                        sendUsertoMainActivity();
-                        Toast.makeText(RegisterActivity.this, "Account Create Successfully.", Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
-                    } else {
-                        String message = task.getException().toString();
-                        Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                    boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+
+                    if(isNewUser){
+                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    String currentUserId = mAuth.getCurrentUser().getUid();
+                                    rootRef.child("Farmer").child("Users").child(currentUserId).setValue("");
+                                    sendUsertoMainActivity();
+                                    Toast.makeText(RegisterActivity.this, "Account Create Successfully.", Toast.LENGTH_SHORT).show();
+                                    loadingBar.dismiss();
+                                } else {
+                                    String message = task.getException().toString();
+                                    Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                                    loadingBar.dismiss();
+                                }
+                            }
+                        });
+                    }else {
+                        Toast.makeText(RegisterActivity.this, "The email address you have entered is already registered.", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
                 }
             });
+
+
         }
     }
 

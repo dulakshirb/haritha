@@ -68,6 +68,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
     private StorageReference userProfileImagesRef;
+    String downloadUrl;
 
     ActivityResultLauncher<String> activityResultLauncher;
 
@@ -103,7 +104,7 @@ public class ProfileFragment extends Fragment {
                         firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                final String downloadUrl = uri.toString();
+                                downloadUrl = uri.toString();
                                 rootRef.child("Farmer").child("Users").child(currentUserId).child("image").setValue(downloadUrl)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -111,6 +112,7 @@ public class ProfileFragment extends Fragment {
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(getActivity(), "Image save in database successfully.", Toast.LENGTH_SHORT).show();
                                                     loadingBar.dismiss();
+                                                    retrieveProfileInfo();
                                                 } else {
                                                     String message = task.getException().toString();
                                                     Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
@@ -173,6 +175,7 @@ public class ProfileFragment extends Fragment {
             profileMap.put("userID", currentUserId);
             profileMap.put("farmName", setFarmName);
             profileMap.put("userName", setUserName);
+            profileMap.put("image", downloadUrl);
             rootRef.child("Farmer").child("Users").child(currentUserId).setValue(profileMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -209,7 +212,10 @@ public class ProfileFragment extends Fragment {
                             String retUserName = snapshot.child("userName").getValue().toString();
                             farmName.setText(retFarmName);
                             userName.setText(retUserName);
-                        } else {
+                        } else if ((snapshot.exists()) && snapshot.hasChild("image")){
+                            String retProfileImage = snapshot.child("image").getValue().toString();
+                            Picasso.get().load(retProfileImage).into(profileImage);
+                        } else{
                             Toast.makeText(getActivity(), "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -44,7 +44,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

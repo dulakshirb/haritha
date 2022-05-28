@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navHeaderView = navigationView.getHeaderView(0);
-        loggedInUserName = (TextView)navHeaderView.findViewById(R.id.txt_loggedin_username);
-        loggedInUserEmail = (TextView)navHeaderView.findViewById(R.id.txt_loggedin_email);
-        loggedInUserProfileImage = (CircleImageView)navHeaderView.findViewById(R.id.img_loggedin_profile);
+        loggedInUserName = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_username);
+        loggedInUserEmail = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_email);
+        loggedInUserProfileImage = (CircleImageView) navHeaderView.findViewById(R.id.img_loggedin_profile);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -122,12 +123,19 @@ public class MainActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
+                        if ((snapshot.exists()) && (snapshot.hasChild("farmName") && snapshot.hasChild("image"))) {
                             String retLoggedInUserName = snapshot.child("farmName").getValue().toString();
                             String retLoggedInUserProfileImage = snapshot.child("image").getValue().toString();
                             loggedInUserEmail.setText(currentUser.getEmail());
                             loggedInUserName.setText(retLoggedInUserName);
                             Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
+                        } else if ((snapshot.exists()) && (snapshot.hasChild("farmName"))) {
+                            String retLoggedInUserName = snapshot.child("farmName").getValue().toString();
+                            loggedInUserEmail.setText(currentUser.getEmail());
+                            loggedInUserName.setText(retLoggedInUserName);
+                        } else {
+                            sendUsertoProfileFragment();
+                            Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
