@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".CropViewFragment">>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_view">
+
+        <TextView
+            android:id="@+id/txt_view_cropsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingRight="20dp"
+            android:text="Crop Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/h_orange" />
+
+        <Button
+            android:id="@+id/btn_edit_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_view"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="140dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Type: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_cropType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Variety: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_cropVariety"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Botanical Name: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_botanicalName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Planted Date: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_plantedName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Start Method: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_startMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Light Profile: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_LightProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Planting Details: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_plantingDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Botanical Name: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_harvestUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Days to Emerge: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_daysToEmerge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Days to Maturity: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_daysToMaturity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Harvest Window: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_harvestWindow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Plant Spacing: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_plantSpacing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Row Spacing: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_rowSpacing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Planting Depth: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_plantingDepth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Estimated Revenue: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_estimatedRevenue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Expected Yield: "
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_view_expectedYield"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="8dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/h_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp">
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_remove_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_red"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Remove"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

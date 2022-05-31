@@ -1,7 +1,9 @@
 package com.haritha.haritha_farmer;
 
+
 public class Crop {
-    private String userId;
+
+    private String crop_id;
     private String crop_type;
     private String crop_name;
     private String crop_variety;
@@ -23,8 +25,8 @@ public class Crop {
     public Crop() {
     }
 
-    public Crop(String userId, String crop_type, String crop_name, String crop_variety, String botanical_name, String planted_date, String start_method, String light_profile, String planting_details, Integer days_to_emerge, String harvest_unit, Integer days_to_maturity, Integer harvest_window, Float plant_spacing, Float row_spacing, Float planting_depth, Float estimated_revenue, Float expected_yield) {
-        this.userId = userId;
+    public Crop(String crop_id, String crop_type, String crop_name, String crop_variety, String botanical_name, String planted_date, String start_method, String light_profile, String planting_details, Integer days_to_emerge, String harvest_unit, Integer days_to_maturity, Integer harvest_window, Float plant_spacing, Float row_spacing, Float planting_depth, Float estimated_revenue, Float expected_yield) {
+        this.crop_id = crop_id;
         this.crop_type = crop_type;
         this.crop_name = crop_name;
         this.crop_variety = crop_variety;
@@ -44,12 +46,12 @@ public class Crop {
         this.expected_yield = expected_yield;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCrop_id() {
+        return crop_id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCrop_id(String crop_id) {
+        this.crop_id = crop_id;
     }
 
     public String getCrop_type() {
