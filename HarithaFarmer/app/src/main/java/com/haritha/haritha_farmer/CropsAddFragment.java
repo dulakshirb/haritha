@@ -143,6 +143,9 @@ public class CropsAddFragment extends Fragment {
 
         crop_type = cropType.getSelectedItem().toString();
         crop_name = cropName.getText().toString().trim();
+        crop_variety = variety.getText().toString().trim();
+        botanical_name = botanicalName.getText().toString().trim();
+        planting_details = plantingDetails.getText().toString().trim();
         days_to_emerge = 0;
         days_to_maturity = 0;
         harvest_window = 0;
@@ -163,9 +166,9 @@ public class CropsAddFragment extends Fragment {
         }
 
         if (crop_variety == null || crop_variety.isEmpty() || crop_variety.trim().isEmpty())
-            crop_variety = "Unknown";
+            crop_variety = "N/a";
         if (botanical_name == null || botanical_name.isEmpty() || botanical_name.trim().isEmpty())
-            botanical_name = "Unknown";
+            botanical_name = "N/a";
         if (planting_details == null || planting_details.isEmpty() || planting_details.trim().isEmpty())
             planting_details = "N/a";
         if (daysToEmerge.length() > 0)
@@ -184,9 +187,6 @@ public class CropsAddFragment extends Fragment {
             estimated_revenue = Float.parseFloat(estimatedRevenue.getText().toString().trim());
         if (expectedYield.length() > 0)
             expected_yield = Float.parseFloat(expectedYield.getText().toString().trim());
-        crop_variety = variety.getText().toString().trim();
-        botanical_name = botanicalName.getText().toString().trim();
-        planting_details = plantingDetails.getText().toString().trim();
         if (planteddate == null || planteddate.isEmpty() || planteddate.trim().isEmpty())
             planted_date = today;
         else
