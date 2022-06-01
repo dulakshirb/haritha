@@ -115,7 +115,7 @@
             android:layout_height="60dp"
             android:background="@drawable/edittext_grey"
             android:hint="0"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:padding="20dp"
             android:textColor="@color/black"
             android:textColorHint="@color/h_light_gray"
@@ -141,14 +141,14 @@
             android:layout_height="60dp"
             android:background="@drawable/edittext_grey"
             android:hint="0"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:padding="20dp"
             android:textColor="@color/black"
             android:textColorHint="@color/h_light_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizerRestockAmount" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_fertilizer_save"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -160,6 +160,6 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_fertilizerRestockAmount"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
