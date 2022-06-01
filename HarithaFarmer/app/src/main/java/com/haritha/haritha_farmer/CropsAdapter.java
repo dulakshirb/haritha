@@ -28,10 +28,24 @@ public class CropsAdapter extends FirebaseRecyclerAdapter<Crop, CropsAdapter.Cro
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, new CropViewFragment(
-                    model.getCrop_id(),
-                    model.getCrop_name(),
-                    model.getCrop_type(),
-                    model.getCrop_variety()))
+                            model.getCrop_id(),
+                            model.getCrop_type(),
+                            model.getCrop_name(),
+                            model.getCrop_variety(),
+                            model.getBotanical_name(),
+                            model.getPlanted_date(),
+                            model.getStart_method(),
+                            model.getLight_profile(),
+                            model.getPlanting_details(),
+                            model.getDays_to_emerge(),
+                            model.getHarvest_unit(),
+                            model.getDays_to_maturity(),
+                            model.getHarvest_window(),
+                            model.getPlant_spacing(),
+                            model.getRow_spacing(),
+                            model.getPlanting_depth(),
+                            model.getEstimated_revenue(),
+                            model.getExpected_yield()))
                     .addToBackStack(null).commit();
         });
     }

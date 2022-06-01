@@ -10,9 +10,9 @@
     tools:context=".CropViewFragment">>
 
     <RelativeLayout
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/top_view">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/txt_view_cropsName"
@@ -169,7 +169,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/txt_view_plantedName"
+                        android:id="@+id/txt_view_plantedDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -284,7 +284,7 @@
                         android:paddingLeft="24dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
-                        android:text="Botanical Name: "
+                        android:text="Harvest Unit: "
                         android:textColor="@color/h_gray"
                         android:textSize="16sp" />
 
