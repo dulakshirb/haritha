@@ -47,6 +47,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.haritha.haritha_farmer.MainActivity;
+import com.haritha.haritha_farmer.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;

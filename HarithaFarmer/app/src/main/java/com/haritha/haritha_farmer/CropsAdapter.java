@@ -12,6 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 public class CropsAdapter extends FirebaseRecyclerAdapter<Crop, CropsAdapter.CropsVH> {
 
 
@@ -21,9 +27,26 @@ public class CropsAdapter extends FirebaseRecyclerAdapter<Crop, CropsAdapter.Cro
 
     @Override
     protected void onBindViewHolder(@NonNull CropsVH holder, int position, @NonNull Crop model) {
-        holder.crop_name.setText(model.getCrop_name());
-        holder.days_to_maturity.setText(model.getDays_to_maturity().toString());
-        holder.planted_date.setText(model.getPlanted_date());
+
+        //calculate remaining maturity days
+        Calendar calendarToday = Calendar.getInstance();
+        long currentDate = calendarToday.getTimeInMillis();
+        long longPlantedDate = Long.parseLong(model.getPlanted_date());
+        System.out.println("currentDate" + currentDate + " plantedDate ");
+        long duration = currentDate - longPlantedDate;
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(duration);
+        System.out.println("Difference " + diffInDays);
+        int remainingMaturityDays = model.getDays_to_maturity() - (int) diffInDays;
+        //  System.out.println("Remaining " + remainingMaturityDays);*/
+
+        //get values to recyclerview
+        holder.txt_rv_crop_heading.setText(model.getCrop_name());
+        holder.txt_rv_days_to_maturity.setText(String.valueOf(remainingMaturityDays));
+        long plantedDate = Long.parseLong(model.getPlanted_date());
+        Date datePlantedDate = new Date(plantedDate);
+        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        holder.txt_rv_planted_date.setText(simpleDateFormat.format(datePlantedDate));
+
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
@@ -59,13 +82,13 @@ public class CropsAdapter extends FirebaseRecyclerAdapter<Crop, CropsAdapter.Cro
 
     public static class CropsVH extends RecyclerView.ViewHolder {
 
-        private final TextView crop_name, days_to_maturity, planted_date;
+        private final TextView txt_rv_crop_heading, txt_rv_days_to_maturity, txt_rv_planted_date;
 
         public CropsVH(@NonNull View itemView) {
             super(itemView);
-            crop_name = itemView.findViewById(R.id.txt_rv_crop_heading);
-            days_to_maturity = itemView.findViewById(R.id.txt_rv_days_to_maturity);
-            planted_date = itemView.findViewById(R.id.txt_rv_planted_date);
+            txt_rv_crop_heading = itemView.findViewById(R.id.txt_rv_crop_heading);
+            txt_rv_days_to_maturity = itemView.findViewById(R.id.txt_rv_days_to_maturity);
+            txt_rv_planted_date = itemView.findViewById(R.id.txt_rv_planted_date);
 
         }
     }

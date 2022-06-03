@@ -1,4 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen tools:override="true" name="design_nav_separator_vertical_padding">20dp</dimen>
-</resources>
+<resources xmlns:tools="http://schemas.android.com/tools"></resources>
