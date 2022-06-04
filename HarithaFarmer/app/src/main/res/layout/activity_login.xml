@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:gravity="center"
     tools:context=".LoginActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/login_logo_img"
@@ -25,7 +17,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="32dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/haritha_logo" />
+                android:src="@drawable/haritha_logo"
+                android:contentDescription="Haritha Logo" />
 
             <TextView
                 android:id="@+id/login_title_name"
@@ -37,23 +30,24 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="Haritha Mobile"
                 android:textColor="@color/h_dark_green"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
 
-            <EditText
-                android:id="@+id/login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_title_name"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/edittext_grey"
-                android:drawableStart="@drawable/ic_baseline_email_24"
-                android:hint=" E-mail address"
-                android:inputType="textEmailAddress"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray" />
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_title_name"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="32dp"
+        android:autofillHints=" E-mail address"
+        android:background="@drawable/edittext_grey"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:hint=" E-mail address"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/h_light_gray" />
 
             <EditText
                 android:id="@+id/login_password"
@@ -68,7 +62,8 @@
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray" />
+                android:textColorHint="@color/h_light_gray"
+                android:autofillHints=" Password" />
 
             <Button
                 android:id="@+id/btn_login"
@@ -119,9 +114,5 @@
                 android:textColor="@color/h_gray"
                 android:textSize="18sp" />
 
-
-        </RelativeLayout>
-
-    </ScrollView>
 
 </RelativeLayout>

@@ -1,20 +1,16 @@
 package com.haritha.haritha_farmer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
@@ -34,12 +30,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
         initializeField();
 
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetPassword();
-            }
-        });
+        btnResetPassword.setOnClickListener(view -> resetPassword());
     }
 
     private void resetPassword() {
@@ -62,17 +53,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
 
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(ForgetPasswordActivity.this, "Check your email to reset your password!", Toast.LENGTH_SHORT).show();
-                    sendUsertoLoginActivity();
-                }else {
-                    Toast.makeText(ForgetPasswordActivity.this, "Try again! Something wrong happened!", Toast.LENGTH_SHORT).show();
-                }
-                loadingBar.dismiss();
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Toast.makeText(ForgetPasswordActivity.this, "Check your email to reset your password!", Toast.LENGTH_SHORT).show();
+                sendUserToLoginActivity();
+            }else {
+                Toast.makeText(ForgetPasswordActivity.this, "Try again! Something wrong happened!", Toast.LENGTH_SHORT).show();
             }
+            loadingBar.dismiss();
         });
     }
 
@@ -82,7 +70,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
     }
 
-    private void sendUsertoLoginActivity() {
+    private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }

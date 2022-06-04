@@ -1,23 +1,20 @@
 package com.haritha.haritha_farmer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,26 +34,11 @@ public class LoginActivity extends AppCompatActivity {
 
         initializeField();
 
-        newUserRegisterLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendUsertoRegisterActivity();
-            }
-        });
+        newUserRegisterLink.setOnClickListener(view -> sendUserToRegisterActivity());
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                allowUserToLogin();
-            }
-        });
+        btnLogin.setOnClickListener(view -> allowUserToLogin());
 
-        forgetPasswordLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendUsertoForgetPasswordActivity();
-            }
-        });
+        forgetPasswordLink.setOnClickListener(view -> sendUserToForgetPasswordActivity());
     }
 
     private void allowUserToLogin() {
@@ -79,26 +61,22 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             loginPassword.setError("This field is required");
             loginPassword.requestFocus();
-            return;
         } else {
             loadingBar.setTitle("Sign In");
             loadingBar.setMessage("Please wait...");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        sendUsertoMainActivity();
-                        Toast.makeText(LoginActivity.this, "Logged in Successful..", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String message = task.getException().toString();
-                        System.out.println("Error : " + message);
-                        Toast.makeText(LoginActivity.this, "Failed to login..", Toast.LENGTH_SHORT).show();
-                    }
-                    loadingBar.dismiss();
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    sendUserToMainActivity();
+                    Toast.makeText(LoginActivity.this, "Logged in Successful..", Toast.LENGTH_SHORT).show();
+                } else {
+                    String message = Objects.requireNonNull(task.getException()).toString();
+                    System.out.println("Error : " + message);
+                    Toast.makeText(LoginActivity.this, "Failed to login..", Toast.LENGTH_SHORT).show();
                 }
+                loadingBar.dismiss();
             });
         }
     }
@@ -113,19 +91,19 @@ public class LoginActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
     }
 
-    private void sendUsertoMainActivity() {
+    private void sendUserToMainActivity() {
         Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
     }
 
-    private void sendUsertoRegisterActivity() {
+    private void sendUserToRegisterActivity() {
         Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(registerIntent);
     }
 
-    private void sendUsertoForgetPasswordActivity() {
+    private void sendUserToForgetPasswordActivity() {
         Intent forgetPasswordIntent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
         startActivity(forgetPasswordIntent);
     }

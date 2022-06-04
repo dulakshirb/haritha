@@ -47,7 +47,6 @@ public class CropsAdapter extends FirebaseRecyclerAdapter<Crop, CropsAdapter.Cro
         DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         holder.txt_rv_planted_date.setText(simpleDateFormat.format(datePlantedDate));
 
-
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, new CropViewFragment(

@@ -1,32 +1,28 @@
 package com.haritha.haritha_farmer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText userEmail, userPassword;
     private Button btnRegister;
-    private TextView alreadyHaveanAccountLink;
+    private TextView alreadyHaveAnAccountLink;
     private ProgressDialog loadingBar;
 
     private FirebaseAuth mAuth;
@@ -42,19 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         initializeField();
 
-        alreadyHaveanAccountLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendUsertoLoginActivity();
-            }
-        });
+        alreadyHaveAnAccountLink.setOnClickListener(view -> sendUserToLoginActivity());
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewUserAccount();
-            }
-        });
+        btnRegister.setOnClickListener(view -> createNewUserAccount());
     }
 
     private void createNewUserAccount() {
@@ -85,32 +71,26 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                @Override
-                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                    boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task -> {
+                boolean isNewUser = Objects.requireNonNull(task.getResult().getSignInMethods()).isEmpty();
 
-                    if(isNewUser){
-                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    String currentUserId = mAuth.getCurrentUser().getUid();
-                                    rootRef.child("Farmer").child("Users").child(currentUserId).setValue("");
-                                    sendUsertoMainActivity();
-                                    Toast.makeText(RegisterActivity.this, "Account Create Successfully.", Toast.LENGTH_SHORT).show();
-                                    loadingBar.dismiss();
-                                } else {
-                                    String message = task.getException().toString();
-                                    Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
-                                    loadingBar.dismiss();
-                                }
-                            }
-                        });
-                    }else {
-                        Toast.makeText(RegisterActivity.this, "The email address you have entered is already registered.", Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
-                    }
+                if(isNewUser){
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            String currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                            rootRef.child("Farmer").child("Users").child(currentUserId).setValue("");
+                            sendUserToMainActivity();
+                            Toast.makeText(RegisterActivity.this, "Account Create Successfully.", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        } else {
+                            String message = Objects.requireNonNull(task1.getException()).toString();
+                            Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
+                    });
+                }else {
+                    Toast.makeText(RegisterActivity.this, "The email address you have entered is already registered.", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
                 }
             });
 
@@ -122,17 +102,17 @@ public class RegisterActivity extends AppCompatActivity {
         userEmail = (EditText) findViewById(R.id.register_email);
         userPassword = (EditText) findViewById(R.id.register_password);
         btnRegister = (Button) findViewById(R.id.btn_register);
-        alreadyHaveanAccountLink = (TextView) findViewById(R.id.already_have_an_account_link);
+        alreadyHaveAnAccountLink = (TextView) findViewById(R.id.already_have_an_account_link);
 
         loadingBar = new ProgressDialog(this);
     }
 
-    private void sendUsertoLoginActivity() {
+    private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }
 
-    private void sendUsertoMainActivity() {
+    private void sendUserToMainActivity() {
         Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
