@@ -1,6 +1,8 @@
 package com.haritha.haritha_farmer;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
 
+    private int PERMISSION_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +66,18 @@ public class MainActivity extends AppCompatActivity {
         loggedInUserName = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_username);
         loggedInUserEmail = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_email);
         loggedInUserProfileImage = (CircleImageView) navHeaderView.findViewById(R.id.img_loggedin_profile);
+
+        Fragment defaultFragment = new MainFragment();
+        loadFragment(defaultFragment);
+
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             Fragment fragment = null;
             switch (id) {
+                case R.id.nav_home:
+                    fragment = new MainFragment();
+                    loadFragment(fragment);
+                    break;
                 case R.id.nav_task_and_schedule:
                     fragment = new TaskAndScheduleFragment();
                     loadFragment(fragment);
@@ -103,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     return true;
             }
+
             return true;
         });
 

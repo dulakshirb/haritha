@@ -28,4 +28,16 @@
         app:itemHorizontalPadding="30dp"
         app:itemBackground="@drawable/menu_item_padding"/>
 
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:textSize="50sp"
+            android:textColor="@color/h_orange"/>
+    </RelativeLayout>-->
+
 </androidx.drawerlayout.widget.DrawerLayout>
