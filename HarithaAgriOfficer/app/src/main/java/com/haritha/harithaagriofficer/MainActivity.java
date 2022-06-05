@@ -60,10 +60,18 @@ public class MainActivity extends AppCompatActivity {
         loggedInUserName = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_username);
         loggedInUserEmail = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_email);
         loggedInUserProfileImage = (CircleImageView) navHeaderView.findViewById(R.id.img_loggedin_profile);
+
+        Fragment defaultFragment = new MainFragment();
+        loadFragment(defaultFragment);
+
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             Fragment fragment = null;
             switch (id) {
+                case R.id.nav_home:
+                    fragment = new MainFragment();
+                    loadFragment(fragment);
+                    break;
                 case R.id.nav_task_and_schedule:
                     fragment = new TaskAndScheduleFragment();
                     loadFragment(fragment);
@@ -149,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         rootRef.child("Officer").child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if ((snapshot.child("farmName").exists())) {
+                if ((snapshot.child("userName").exists())) {
                     //Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
                     retrieveLoggedInUserInfo();
                 } else {
