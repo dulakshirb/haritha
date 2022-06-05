@@ -2,6 +2,7 @@ package com.haritha.haritha_farmer;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -9,6 +10,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,8 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -32,6 +37,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
@@ -49,10 +61,6 @@ import java.util.Objects;
 
 public class MainFragment extends Fragment {
 
-    public MainFragment() {
-
-    }
-
     private RelativeLayout rl_weather_home;
     private ProgressBar pb_Loading;
     private TextView txt_current_city_name, txt_current_temperature, txt_current_weather_condition;
@@ -61,8 +69,8 @@ public class MainFragment extends Fragment {
     private RecyclerView rv_weather;
     private ArrayList<Weather> weatherArrayList;
     private WeatherAdapter weatherAdapter;
-    private final int PERMISSION_CODE = 1;
     private String cityName;
+    private GpsTracker gpsTracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +78,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        //Assign variables
         rl_weather_home = view.findViewById(R.id.rl_weather_home);
         pb_Loading = view.findViewById(R.id.pb_Loading);
         txt_current_city_name = view.findViewById(R.id.txt_current_city_name);
@@ -79,41 +88,30 @@ public class MainFragment extends Fragment {
         img_current_weather_icon = view.findViewById(R.id.img_current_weather_icon);
         btn_search = view.findViewById(R.id.btn_search);
         rv_weather = view.findViewById(R.id.rv_weather);
+
         weatherArrayList = new ArrayList<>();
         weatherAdapter = new WeatherAdapter(getActivity(), weatherArrayList);
-
         rv_weather.setAdapter(weatherAdapter);
 
-
-        /*if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_CODE);
-            mPermissionResult.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-            mPermissionResult.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
-        }*/
-
-        int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
-        int permissionCheck2 = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
+        try {
+            if (ContextCompat.checkSelfPermission(gpsTracker.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        if (permissionCheck2 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_CODE);
-        }
-
-        LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria,true);
-
-        Location location = locationManager.getLastKnownLocation(provider);
-        if(location!=null) {
-            cityName = getCityName(location.getLongitude(), location.getLatitude());
+        gpsTracker = new GpsTracker(getActivity());
+        if(gpsTracker.canGetLocation()){
+            double longitude= gpsTracker.getLongitude();
+            double latitude = gpsTracker.getLatitude();
+            cityName = getCityName(longitude,latitude);
             getWeatherInfo(cityName);
-        }else {
-            cityName = "Colombo";
-            getWeatherInfo(cityName);
+        }else{
+            gpsTracker.showSettingsAlert();
         }
+
+
+
         btn_search.setOnClickListener(v -> {
             String city = Objects.requireNonNull(txt_search_city_name.getText()).toString().trim();
             if (city.isEmpty()) {
@@ -127,7 +125,7 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-        private String getCityName(double longitude, double latitude) {
+    private String getCityName(double longitude, double latitude) {
         String cityName = "Not found";
         Geocoder geocoder = new Geocoder(getActivity().getBaseContext(), Locale.getDefault());
         try {
@@ -139,7 +137,7 @@ public class MainFragment extends Fragment {
                         cityName = city;
                     } else {
                         Log.d("TAG", "CITY NOT FOUND");
-                        Toast.makeText(getActivity(), "User City Not Found...", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "User City Not Found...", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -173,13 +171,13 @@ public class MainFragment extends Fragment {
                     JSONObject forecastO = forecastObj.getJSONArray("forecastday").getJSONObject(0);
                     JSONArray hourArray = forecastO.getJSONArray("hour");
 
-                    for(int i=0; i<hourArray.length(); i++){
+                    for (int i = 0; i < hourArray.length(); i++) {
                         JSONObject hourObj = hourArray.getJSONObject(i);
                         String time = hourObj.getString("time");
                         String temp = hourObj.getString("temp_c");
                         String img = hourObj.getJSONObject("condition").getString("icon");
                         String windSpeed = hourObj.getString("wind_kph");
-                        weatherArrayList.add(new Weather(time,temp,img,windSpeed));
+                        weatherArrayList.add(new Weather(time, temp, img, windSpeed));
                     }
                     weatherAdapter.notifyDataSetChanged();
 
