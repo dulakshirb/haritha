@@ -1,118 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:gravity="center"
     tools:context=".LoginActivity">
 
-
-            <ImageView
-                android:id="@+id/login_logo_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="32dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/haritha_logo"
-                android:contentDescription="Haritha Logo" />
-
-            <TextView
-                android:id="@+id/login_title_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_logo_img"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Haritha Mobile"
-                android:textColor="@color/h_dark_green"
-                android:textSize="30sp" />
-
-
-    <EditText
-        android:id="@+id/login_email"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_title_name"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="32dp"
-        android:autofillHints=" E-mail address"
-        android:background="@drawable/edittext_grey"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:hint=" E-mail address"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/h_light_gray" />
+        android:layout_margin="15dp"
+        android:padding="20dp">
 
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_email"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/edittext_grey"
-                android:drawableStart="@drawable/ic_baseline_vpn_key_24"
-                android:hint=" Password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/h_light_gray"
-                android:autofillHints=" Password" />
+        <ImageView
+            android:id="@+id/login_logo_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Haritha Logo"
+            android:maxWidth="100dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/haritha_logo" />
 
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@id/login_password"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_green"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Login"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/login_title_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_logo_img"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Haritha Mobile"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/h_dark_green" />
 
-            <TextView
-                android:id="@+id/forget_password_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btn_login"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Forget password?"
-                android:textAlignment="textEnd"
-                android:textColor="@color/h_light_gray"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/dont_have_an_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/forget_password_link"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Don't have an account?"
-                android:textAlignment="textStart"
-                android:textColor="@color/h_light_gray"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/new_user_register_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dont_have_an_account"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Register here"
-                android:textAlignment="textStart"
-                android:textColor="@color/h_gray"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/register_subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_title_name"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Please enter your credentials to login"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/h_gray" />
 
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/txt_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/register_subTitle"
+            android:layout_marginTop="20dp"
+            android:autofillHints=" E-mail address"
+            android:background="@drawable/edittext_grey"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="10dp"
+            android:hint="E-mail address"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
+
+        <ImageView
+            android:id="@+id/img_show_hide_password"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_below="@id/txt_login_email"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/txt_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_login_email"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="32dp"
+            android:autofillHints="Password"
+            android:background="@drawable/edittext_grey"
+            android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+            android:drawablePadding="10dp"
+            android:hint=" Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/h_light_gray" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_login_password"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/forget_password_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_login"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Forget password?"
+            android:textAlignment="textEnd"
+            android:textColor="@color/h_light_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/dont_have_an_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forget_password_link"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Don't have an account?"
+            android:textAlignment="textStart"
+            android:textColor="@color/h_light_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/new_user_register_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dont_have_an_account"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Register here"
+            android:textAlignment="textStart"
+            android:textColor="@color/h_gray"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</ScrollView>

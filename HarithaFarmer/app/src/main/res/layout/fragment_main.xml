@@ -80,7 +80,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="City Name"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
                 </LinearLayout>
 
                 <TextView
@@ -90,7 +90,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="30C'"
                     android:textColor="@color/white"
-                    android:textSize="60sp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             </LinearLayout>
         </LinearLayout>
@@ -100,8 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ll_current_city_details"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_search_city_name"

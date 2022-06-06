@@ -67,4 +67,15 @@
         <item>Compost</item>
     </array>
 
+    <array name="countries">
+        <item>Afghanistan</item>
+        <item>Bangladesh</item>
+        <item>Bhutan</item>
+        <item>India</item>
+        <item>Maldives</item>
+        <item>Nepal</item>
+        <item>Pakistan</item>
+        <item>Sri Lanka</item>
+    </array>
+
 </resources>

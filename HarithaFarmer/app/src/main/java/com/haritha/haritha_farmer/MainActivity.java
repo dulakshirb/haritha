@@ -129,15 +129,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if ((snapshot.exists()) && (snapshot.hasChild("farmName") && snapshot.hasChild("image"))) {
-                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
-                            String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
+                            //String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
+                            //String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
                             loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(retLoggedInUserName);
-                            Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
+                            loggedInUserName.setText(currentUser.getDisplayName());
+                         //   Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
                         } else if ((snapshot.exists()) && (snapshot.hasChild("farmName"))) {
-                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
+                          //  String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
                             loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(retLoggedInUserName);
+                            loggedInUserName.setText(currentUser.getDisplayName());
                         } else {
                             sendUserToProfileFragment();
                             Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
