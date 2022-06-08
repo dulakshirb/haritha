@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(fragment);
                     break;
                 case R.id.nav_support:
+                    fragment = new SupportFragment();
+                    loadFragment(fragment);
                     break;
                 case R.id.nav_logout:
                     if (item.getItemId() == R.id.nav_logout) {
