@@ -34,14 +34,9 @@
             android:title="Seeding" />
 
         <item
-            android:id="@+id/nav_predictive_analytics"
-            android:icon="@drawable/ic_carbon_agriculture_analytics"
-            android:title="Predictive Analytics" />
-
-        <item
-            android:id="@+id/nav_security"
-            android:icon="@drawable/ic_carbon_gateway_security"
-            android:title="Security" />
+            android:id="@+id/nav_bio_gas_monitoring"
+            android:icon="@drawable/ic_baseline_hourglass_full_24"
+            android:title="Bio Gas Monitoring" />
 
         <item
             android:id="@+id/nav_watering_and_soilHealth"
@@ -57,9 +52,19 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="Profile" />
+
+        <item
+            android:id="@+id/nav_support"
+            android:icon="@drawable/ic_baseline_support_agent_24"
+            android:title="Support" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_ant_design_logout_outlined"
+            android:title="Logout" />
     </group>
 
-    <item android:title="">
+    <!--<item android:title="">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -72,6 +77,6 @@
                     android:title="Logout" />
             </group>
         </menu>
-    </item>
+    </item>-->
 
 </menu>

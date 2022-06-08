@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -133,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         TextView already_have_an_account_link = findViewById(R.id.already_have_an_account_link);
         already_have_an_account_link.setOnClickListener(view -> sendUserToLoginActivity());
     }
+
 
     //register user using the credentials given
     private void registerUser(String txtUserName, String txtEmail, String txtMobile, String txtGender, String txtFarmName, String txtLocation, String txtCountry, String txtPassword) {

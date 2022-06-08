@@ -210,7 +210,7 @@
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/txt_register_confirmed_password"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_green"
