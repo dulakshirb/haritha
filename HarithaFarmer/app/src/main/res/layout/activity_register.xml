@@ -169,20 +169,20 @@
             android:textColorHint="@color/h_light_gray" />
 
         <Spinner
-            android:id="@+id/sp_register_country"
+            android:id="@+id/sp_register_district"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_register_location"
             android:layout_marginTop="15dp"
             android:background="@drawable/spinner_grey"
-            android:entries="@array/countries"
+            android:entries="@array/districts"
             android:padding="10dp" />
 
         <EditText
             android:id="@+id/txt_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sp_register_country"
+            android:layout_below="@id/sp_register_district"
             android:layout_centerInParent="true"
             android:layout_marginTop="15dp"
             android:background="@drawable/edittext_grey"

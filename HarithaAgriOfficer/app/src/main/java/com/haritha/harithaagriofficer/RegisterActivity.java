@@ -1,18 +1,31 @@
 package com.haritha.harithaagriofficer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,9 +33,12 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText userEmail, userPassword;
-    private Button btnRegister;
-    private TextView alreadyHaveAnAccountLink;
+    private EditText txt_register_user_name, txt_register_email, txt_register_mobile_number, txt_register_password,
+            txt_register_confirmed_password;
+    private RadioGroup rg_gender_group;
+    private RadioButton rb_register_gender_selected;
+    private Spinner sp_register_district;
+    private static final String TAG = "RegisterActivity";
     private ProgressDialog loadingBar;
 
     private FirebaseAuth mAuth;
@@ -33,90 +49,147 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth = FirebaseAuth.getInstance();
-        rootRef = FirebaseDatabase.getInstance().getReference();
+        txt_register_user_name = findViewById(R.id.txt_register_user_name);
+        txt_register_email = findViewById(R.id.txt_register_email);
+        txt_register_mobile_number = findViewById(R.id.txt_register_mobile_number);
+        txt_register_password = findViewById(R.id.txt_register_password);
+        txt_register_confirmed_password = findViewById(R.id.txt_register_confirmed_password);
+        sp_register_district = findViewById(R.id.sp_register_district);
+        rg_gender_group = findViewById(R.id.rg_gender_group);
+        rg_gender_group.clearCheck();
+        loadingBar = new ProgressDialog(this);
 
-        initializeField();
+        //register button
+        Button btn_register = findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(view -> {
 
-        alreadyHaveAnAccountLink.setOnClickListener(view -> sendUserToLoginActivity());
-        btnRegister.setOnClickListener(view -> createNewUserAccount());
+            //selected gender id
+            int selectedGenderId = rg_gender_group.getCheckedRadioButtonId();
+            rb_register_gender_selected = findViewById(selectedGenderId);
+
+            //obtain the entered data
+            String txtUserName = txt_register_user_name.getText().toString().trim();
+            String txtEmail = txt_register_email.getText().toString().trim();
+            String txtMobile = txt_register_mobile_number.getText().toString().trim();
+            String txtPassword = txt_register_password.getText().toString().trim();
+            String txtConfirmedPassword = txt_register_confirmed_password.getText().toString().trim();
+            String txtDistrict;
+            String txtGender;
+
+            if (TextUtils.isEmpty(txtUserName)) {
+                txt_register_user_name.setError("Your Name is required.");
+                txt_register_user_name.requestFocus();
+            } else if (TextUtils.isEmpty(txtEmail)) {
+                txt_register_email.setError("E-mail is required.");
+                txt_register_email.requestFocus();
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(txtEmail).matches()) {
+                txt_register_email.setError("Valid e-mail is required.");
+                txt_register_email.requestFocus();
+            } else if (TextUtils.isEmpty(txtMobile)) {
+                txt_register_mobile_number.setError("Mobile No. is required.");
+                txt_register_mobile_number.requestFocus();
+            } else if (txtMobile.length() != 10) {
+                txt_register_mobile_number.setError("Mobile no. should be 10 digits.");
+                txt_register_mobile_number.requestFocus();
+            } else if (rg_gender_group.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(RegisterActivity.this, "Gender is required.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(txtPassword)) {
+                txt_register_password.setError("Password is required.");
+                txt_register_password.requestFocus();
+            } else if (txtPassword.length() < 6) {
+                txt_register_password.setError("Password too weak.");
+                txt_register_password.requestFocus();
+            } else if (TextUtils.isEmpty(txtConfirmedPassword)) {
+                txt_register_confirmed_password.setError("Password confirmation is required.");
+                txt_register_confirmed_password.requestFocus();
+            } else if (!txtPassword.equals(txtConfirmedPassword)) {
+                txt_register_confirmed_password.setError("Password & Confirm Password must be match.");
+                txt_register_confirmed_password.requestFocus();
+                //clear the entered passwords
+                txt_register_password.clearComposingText();
+                txt_register_confirmed_password.clearComposingText();
+            } else {
+                txtDistrict = sp_register_district.getSelectedItem().toString();
+                txtGender = rb_register_gender_selected.getText().toString();
+                loadingBar.setTitle("Creating New Account");
+                loadingBar.setMessage("Please wait, while we are creating new account for you...");
+                loadingBar.setCanceledOnTouchOutside(true);
+                loadingBar.show();
+                registerUser(txtUserName, txtEmail, txtMobile, txtGender, txtDistrict, txtPassword);
+            }
+        });
+
+        //back to login
+        TextView already_have_an_account_link = findViewById(R.id.already_have_an_account_link);
+        already_have_an_account_link.setOnClickListener(view -> sendUserToLoginActivity());
+
     }
 
-    private void createNewUserAccount() {
-        String email = userEmail.getText().toString().trim();
-        String password = userPassword.getText().toString().trim();
+    //register user using the credentials given
+    private void registerUser(String txtUserName, String txtEmail, String txtMobile, String txtGender, String txtDistrict, String txtPassword) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-        if (TextUtils.isEmpty(email)) {
-            userEmail.setError("Email is required!");
-            userEmail.requestFocus();
-            return;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            userEmail.setError("Please provide a valid email.");
-            userEmail.requestFocus();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            userPassword.setError("Password is required");
-            userPassword.requestFocus();
-            return;
-        }
-        if (password.length() < 6) {
-            {
-                userPassword.setError("Sorry, that password isn't right. Password must have at lease 8 characters.");
-            }
-        } else {
-            loadingBar.setTitle("Creating New Account");
-            loadingBar.setMessage("Please wait, while we are creating new account for you...");
-            loadingBar.setCanceledOnTouchOutside(true);
-            loadingBar.show();
+                    //Update display name of user
+                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(txtUserName).build();
+                    firebaseUser.updateProfile(profileChangeRequest);
 
-            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task -> {
-                boolean isNewUser = Objects.requireNonNull(task.getResult().getSignInMethods()).isEmpty();
-
-                if (isNewUser) {
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            String currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                            rootRef.child("Officer").child("Users").child(currentUserId).setValue("");
-                            sendUserToMainActivity();
-                            Toast.makeText(RegisterActivity.this, "Account Create Successfully.", Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
-                        } else {
-                            String message = Objects.requireNonNull(task1.getException()).toString();
-                            Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                    //Enter user data into the Firebase Realtime Database
+                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(txtMobile, txtGender, txtDistrict);
+                    //Extracting user reference from database for registered users
+                    DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Officer").child("Users");
+                    referenceUsers.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //send verification email
+                                firebaseUser.sendEmailVerification();
+                                Toast.makeText(RegisterActivity.this, "User registered successfully. Please verify your email.", Toast.LENGTH_LONG).show();
+                                sendUserToMainActivity();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "User registered failed. Please try again.", Toast.LENGTH_LONG).show();
+                            }
                             loadingBar.dismiss();
                         }
                     });
                 } else {
-                    Toast.makeText(RegisterActivity.this, "The email address you have entered is already registered.", Toast.LENGTH_SHORT).show();
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        txt_register_password.setError("Your password is too weak. Kindly use a mix of alphabets, numbers and special characters.");
+                        txt_register_password.requestFocus();
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        txt_register_email.setError("Your email is invalid or already in use. Kindly re-enter.");
+                        txt_register_password.requestFocus();
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        txt_register_email.setError("User is already registered with this email. User another email.");
+                        txt_register_password.requestFocus();
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                     loadingBar.dismiss();
                 }
-            });
-
-
-        }
+            }
+        });
     }
 
     private void sendUserToMainActivity() {
         Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainIntent);
         finish();
     }
 
-    private void initializeField() {
-        userEmail = (EditText) findViewById(R.id.register_email);
-        userPassword = (EditText) findViewById(R.id.register_password);
-        btnRegister = (Button) findViewById(R.id.btn_register);
-        alreadyHaveAnAccountLink = (TextView) findViewById(R.id.already_have_an_account_link);
-
-        loadingBar = new ProgressDialog(this);
-    }
-
     private void sendUserToLoginActivity() {
-        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(loginIntent);
+        Intent registerIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        registerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(registerIntent);
+        finish();
     }
 
 }

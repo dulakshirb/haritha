@@ -1,4 +1,4 @@
-package com.haritha.haritha_farmer;
+package com.haritha.harithaagriofficer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -37,13 +37,12 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileUpdateFragment extends Fragment {
 
     private View view;
-    private EditText txt_update_name, txt_update_phone, txt_update_farm_name,
-            txt_update_location;
+    private EditText txt_update_name, txt_update_phone;
     private RadioGroup rg_update_gender_group;
     private RadioButton rb_update_gender_selected;
     private Spinner sp_update_district;
     private ProgressDialog loadingBar;
-    private String name, phone, gender, farmName, location, district;
+    private String name, phone, gender, district;
     private FirebaseAuth mAuth;
 
     @Override
@@ -54,8 +53,6 @@ public class ProfileUpdateFragment extends Fragment {
 
         txt_update_name = view.findViewById(R.id.txt_update_name);
         txt_update_phone = view.findViewById(R.id.txt_update_phone);
-        txt_update_farm_name = view.findViewById(R.id.txt_update_farm_name);
-        txt_update_location = view.findViewById(R.id.txt_update_location);
         sp_update_district = view.findViewById(R.id.sp_update_district);
         rg_update_gender_group = view.findViewById(R.id.rg_update_gender_group);
 
@@ -84,8 +81,8 @@ public class ProfileUpdateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                Fragment ProfileUpdateEmailFragment = new ProfileUpdateEmailFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, ProfileUpdateEmailFragment).addToBackStack(null).commit();
+                Fragment profileUpdateEmailFragment = new ProfileUpdateEmailFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, profileUpdateEmailFragment).addToBackStack(null).commit();
             }
         });
 
@@ -119,25 +116,17 @@ public class ProfileUpdateFragment extends Fragment {
             txt_update_phone.requestFocus();
         } else if (TextUtils.isEmpty(rb_update_gender_selected.getText())) {
             Toast.makeText(getActivity(), "Gender is required.", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(farmName)) {
-            txt_update_farm_name.setError("Farm Name is required.");
-            txt_update_farm_name.requestFocus();
-        } else if (TextUtils.isEmpty(location)) {
-            txt_update_location.setError("Location is required.");
-            txt_update_location.requestFocus();
         } else {
             //obtain the data entered by user
             name = txt_update_name.getText().toString().trim();
             phone = txt_update_phone.getText().toString().trim();
-            farmName = txt_update_farm_name.getText().toString().trim();
-            location = txt_update_location.getText().toString().trim();
             district = sp_update_district.getSelectedItem().toString();
             gender = rb_update_gender_selected.getText().toString();
 
             //update user data in firebase
-            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(phone, gender, farmName, location, district);
+            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(phone, gender, district);
             String userId = currentUser.getUid();
-            DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Farmer").child("Users");
+            DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Officer").child("Users");
 
             loadingBar.setTitle("Update Account");
             loadingBar.setMessage("Please wait, while we are updating your account for you...");
@@ -173,7 +162,7 @@ public class ProfileUpdateFragment extends Fragment {
     //fetch data from db and display
     private void showProfile(FirebaseUser currentUser) {
         String userId = currentUser.getUid();
-        DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Farmer").child("Users");
+        DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Officer").child("Users");
 
         loadingBar.setTitle("Profile Data");
         loadingBar.setMessage("Loading...");
@@ -188,14 +177,10 @@ public class ProfileUpdateFragment extends Fragment {
                     name = currentUser.getDisplayName();
                     phone = readUserDetails.mobile;
                     gender = readUserDetails.gender;
-                    farmName = readUserDetails.farmName;
-                    location = readUserDetails.location;
                     district = readUserDetails.district;
 
                     txt_update_name.setText(name);
                     txt_update_phone.setText(phone);
-                    txt_update_farm_name.setText(farmName);
-                    txt_update_location.setText(location);
 
                     //show gender through radio button
                     if (gender.equals("Male")) {
@@ -222,39 +207,39 @@ public class ProfileUpdateFragment extends Fragment {
                         sp_update_district.setSelection(6);
                     } else if (district.equals("Hambantota")) {
                         sp_update_district.setSelection(7);
-                    }else if (district.equals("Jaffna")) {
+                    } else if (district.equals("Jaffna")) {
                         sp_update_district.setSelection(8);
-                    }else if (district.equals("Kalutara")) {
+                    } else if (district.equals("Kalutara")) {
                         sp_update_district.setSelection(9);
-                    }else if (district.equals("Kandy")) {
+                    } else if (district.equals("Kandy")) {
                         sp_update_district.setSelection(10);
-                    }else if (district.equals("Kegalle")) {
+                    } else if (district.equals("Kegalle")) {
                         sp_update_district.setSelection(11);
-                    }else if (district.equals("Kilinochchi")) {
+                    } else if (district.equals("Kilinochchi")) {
                         sp_update_district.setSelection(12);
-                    }else if (district.equals("Kurunegala")) {
+                    } else if (district.equals("Kurunegala")) {
                         sp_update_district.setSelection(13);
-                    }else if (district.equals("Mannar")) {
+                    } else if (district.equals("Mannar")) {
                         sp_update_district.setSelection(14);
-                    }else if (district.equals("Matale")) {
+                    } else if (district.equals("Matale")) {
                         sp_update_district.setSelection(15);
-                    }else if (district.equals("Matara")) {
+                    } else if (district.equals("Matara")) {
                         sp_update_district.setSelection(16);
-                    }else if (district.equals("Moneragala")) {
+                    } else if (district.equals("Moneragala")) {
                         sp_update_district.setSelection(17);
-                    }else if (district.equals("Mullaitivu")) {
+                    } else if (district.equals("Mullaitivu")) {
                         sp_update_district.setSelection(18);
-                    }else if (district.equals("Nuwara Eliya")) {
+                    } else if (district.equals("Nuwara Eliya")) {
                         sp_update_district.setSelection(19);
-                    }else if (district.equals("Polonnaruwa")) {
+                    } else if (district.equals("Polonnaruwa")) {
                         sp_update_district.setSelection(20);
-                    }else if (district.equals("Puttalam")) {
+                    } else if (district.equals("Puttalam")) {
                         sp_update_district.setSelection(21);
-                    }else if (district.equals("Ratnapura")) {
+                    } else if (district.equals("Ratnapura")) {
                         sp_update_district.setSelection(22);
-                    }else if (district.equals("Trincomalee")) {
+                    } else if (district.equals("Trincomalee")) {
                         sp_update_district.setSelection(23);
-                    }else if (district.equals("Vavuniya")) {
+                    } else if (district.equals("Vavuniya")) {
                         sp_update_district.setSelection(24);
                     }
 

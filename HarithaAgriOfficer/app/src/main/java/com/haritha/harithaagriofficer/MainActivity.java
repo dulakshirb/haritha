@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -106,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
 
         if (currentUser == null) {
             sendUserToLoginActivity();
@@ -121,19 +122,20 @@ public class MainActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if ((snapshot.exists()) && (snapshot.hasChild("userName") && snapshot.hasChild("image"))) {
-                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("userName").getValue()).toString();
-                            String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
+                        if ((snapshot.exists()) && (snapshot.hasChild("name"))) {
+                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("name").getValue()).toString();
+                            //String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
                             loggedInUserEmail.setText(currentUser.getEmail());
                             loggedInUserName.setText(retLoggedInUserName);
-                            Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
-                        } else if ((snapshot.exists()) && (snapshot.hasChild("userName"))) {
-                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("userName").getValue()).toString();
-                            loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(retLoggedInUserName);
-                        } else {
+
+                            if(currentUser.getPhotoUrl() != null){
+                                Uri uri = currentUser.getPhotoUrl();
+                                Picasso.get().load(uri).into(loggedInUserProfileImage);
+                            }
+                            //   Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
+                        }else {
                             sendUserToProfileFragment();
-                            Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -152,12 +154,23 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (currentUser == null) {
+            sendUserToLoginActivity();
+        } else {
+            verifyUserExistence();
+        }
+    }
+
     private void verifyUserExistence() {
         String currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         rootRef.child("Officer").child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if ((snapshot.child("userName").exists())) {
+                if ((snapshot.child("farmName").exists())) {
                     //Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
                     retrieveLoggedInUserInfo();
                 } else {
@@ -172,15 +185,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void sendUserToProfileFragment() {
+        Fragment fragment = new ProfileFragment();
+        loadFragment(fragment);
+    }
+
     private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
-    }
-
-    private void sendUserToProfileFragment() {
-        Fragment fragment = new ProfileFragment();
-        loadFragment(fragment);
     }
 }

@@ -86,39 +86,12 @@
 
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/txt_update_farm_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rg_update_gender_group"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/edittext_grey"
-            android:hint="Farm Name"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/h_light_gray"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/txt_update_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_update_farm_name"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/edittext_grey"
-            android:hint="Location*"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/h_light_gray" />
 
         <Spinner
             android:id="@+id/sp_update_district"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_update_location"
+            android:layout_below="@+id/rg_update_gender_group"
             android:layout_marginTop="15dp"
             android:background="@drawable/spinner_grey"
             android:entries="@array/districts"

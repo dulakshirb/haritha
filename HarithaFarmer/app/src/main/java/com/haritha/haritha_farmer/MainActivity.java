@@ -1,21 +1,16 @@
 package com.haritha.haritha_farmer;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -34,8 +29,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
 
@@ -45,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
-
-    private int PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,9 +111,21 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
 
+
             return true;
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (currentUser == null) {
+            sendUserToLoginActivity();
+        } else {
+            verifyUserExistence();
+        }
     }
 
     private void retrieveLoggedInUserInfo() {
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                          //   Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
                         }else {
                             sendUserToProfileFragment();
-                            Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
                         }
                     }
 

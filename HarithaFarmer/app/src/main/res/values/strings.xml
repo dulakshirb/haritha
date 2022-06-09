@@ -79,5 +79,33 @@
         <item>Pakistan</item>
         <item>Sri Lanka</item>
     </string-array>
+    
+    <string-array name="districts">
+        <item>Ampara</item>
+        <item>Anuradhapura</item>
+        <item>Badulla</item>
+        <item>Batticaloa</item>
+        <item>Colombo</item>
+        <item>Galle</item>
+        <item>Gampaha</item>
+        <item>Hambantota</item>
+        <item>Jaffna</item>
+        <item>Kalutara</item>
+        <item>Kandy</item>
+        <item>Kegalle</item>
+        <item>Kilinochchi</item>
+        <item>Kurunegala</item>
+        <item>Mannar</item>
+        <item>Matale</item>
+        <item>Matara</item>
+        <item>Moneragala</item>
+        <item>Mullaitivu</item>
+        <item>Nuwara Eliya</item>
+        <item>Polonnaruwa</item>
+        <item>Puttalam</item>
+        <item>Ratnapura</item>
+        <item>Trincomalee</item>
+        <item>Vavuniya</item>
+    </string-array>
 
 </resources>

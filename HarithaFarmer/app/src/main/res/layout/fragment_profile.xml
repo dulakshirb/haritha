@@ -184,7 +184,7 @@
                 android:background="@drawable/ic_country" />
 
             <TextView
-                android:id="@+id/txt_show_country"
+                android:id="@+id/txt_show_district"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view5"

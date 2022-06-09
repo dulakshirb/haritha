@@ -1,4 +1,4 @@
-package com.haritha.haritha_farmer;
+package com.haritha.harithaagriofficer;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -67,7 +67,7 @@ public class ProfileDeleteFragment extends Fragment {
         btn_delete_user.setEnabled(false);
 
         if (currentUser.equals("")) {
-          //  Toast.makeText(getActivity(), "Something went wrong! User's details not available.", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(getActivity(), "Something went wrong! User's details not available.", Toast.LENGTH_LONG).show();
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             Fragment fragment = new ProfileFragment();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
@@ -204,7 +204,7 @@ public class ProfileDeleteFragment extends Fragment {
         });
 
         //delete data from realtime db
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Farmer").child("Users");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Officer").child("Users");
         databaseReference.child(currentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

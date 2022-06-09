@@ -1,4 +1,4 @@
-package com.haritha.haritha_farmer;
+package com.haritha.harithaagriofficer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -28,7 +28,6 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
 public class ProfileChangePasswordFragment extends Fragment {
 
     private View view;
@@ -45,7 +44,7 @@ public class ProfileChangePasswordFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile_change_password, container, false);
 
-         mAuth= FirebaseAuth.getInstance();
+        mAuth= FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         txt_change_password_current_password = view.findViewById(R.id.txt_change_password_current_password);
@@ -69,6 +68,7 @@ public class ProfileChangePasswordFragment extends Fragment {
         } else {
             reAuthenticate(currentUser);
         }
+
 
         return view;
     }
@@ -233,4 +233,5 @@ public class ProfileChangePasswordFragment extends Fragment {
         startActivity(mainIntent);
         getActivity().finish();
     }
+
 }

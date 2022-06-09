@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".ProfilePictureUploadFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txt_upload_pic_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload your profile pic"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <Button
+            android:id="@+id/btn_choose_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_upload_pic_heading"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Choose Picture"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile_dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/btn_choose_picture"
+            android:layout_marginVertical="20dp"
+            android:src="@drawable/pro_pic"
+            app:civ_border_color="@color/h_light_green"
+            app:civ_border_width="1dp"/>
+
+        <Button
+            android:id="@+id/btn_upload_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_profile_dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Upload"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

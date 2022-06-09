@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,16 +30,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileFragment extends Fragment {
 
     private View view;
     private TextView txt_show_farm_name, txt_show_name, txt_show_email,
-            txt_show_phone, txt_show_gender, txt_show_location, txt_show_country;
+            txt_show_phone, txt_show_gender, txt_show_location, txt_show_district;
     private ImageView img_profile;
     private ProgressDialog loadingBar;
-    private String farmName, name, email, phone, gender, location, country;
+    private String farmName, name, email, phone, gender, location, district;
     private FirebaseAuth mAuth;
 
     public ProfileFragment() {
@@ -60,7 +54,7 @@ public class ProfileFragment extends Fragment {
         txt_show_phone = view.findViewById(R.id.txt_show_phone);
         txt_show_gender = view.findViewById(R.id.txt_show_gender);
         txt_show_location = view.findViewById(R.id.txt_show_location);
-        txt_show_country = view.findViewById(R.id.txt_show_country);
+        txt_show_district = view.findViewById(R.id.txt_show_district);
         loadingBar = new ProgressDialog(getActivity());
 
         //set onClickListener on ImageView to Open ProfilePictureUploadFragment
@@ -132,7 +126,7 @@ public class ProfileFragment extends Fragment {
                     gender = readUserDetails.gender;
                     farmName = readUserDetails.farmName;
                     location = readUserDetails.location;
-                    country = readUserDetails.country;
+                    district = readUserDetails.district;
 
                     txt_show_farm_name.setText(farmName);
                     txt_show_name.setText(name);
@@ -140,7 +134,7 @@ public class ProfileFragment extends Fragment {
                     txt_show_phone.setText(phone);
                     txt_show_gender.setText(gender);
                     txt_show_location.setText(location);
-                    txt_show_country.setText(country);
+                    txt_show_district.setText(district);
 
                     //Set user DP
                     if (currentUser.getPhotoUrl() != null) {

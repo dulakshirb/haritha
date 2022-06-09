@@ -1,4 +1,4 @@
-package com.haritha.haritha_farmer;
+package com.haritha.harithaagriofficer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,9 +7,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,42 +27,44 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
-public class ProfileChangePasswordFragment extends Fragment {
+public class ProfileUpdateEmailFragment extends Fragment {
 
     private View view;
-    private EditText txt_change_password_current_password, txt_change_password_new, txt_change_password_new_confirm;
-    private TextView txt_change_password_authenticated;
-    private Button btn_change_password_authenticate, btn_change_password;
-    private String currentPassword;
+    private EditText txt_update_email_new, txt_update_email_verify_password;
+    private TextView txt_update_email_authenticated;
     private ProgressDialog loadingBar;
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private String oldEmail, newEmail, password;
+    private Button btn_update_email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_profile_change_password, container, false);
+        view = inflater.inflate(R.layout.fragment_profile_update_email, container, false);
 
-         mAuth= FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        txt_change_password_current_password = view.findViewById(R.id.txt_change_password_current_password);
-        txt_change_password_new = view.findViewById(R.id.txt_change_password_new);
-        txt_change_password_new_confirm = view.findViewById(R.id.txt_change_password_new_confirm);
-        txt_change_password_authenticated = view.findViewById(R.id.txt_change_password_authenticated);
-        btn_change_password_authenticate = view.findViewById(R.id.btn_change_password_authenticate);
-        btn_change_password = view.findViewById(R.id.btn_change_password);
+        txt_update_email_new = view.findViewById(R.id.txt_update_email_new);
+        txt_update_email_verify_password = view.findViewById(R.id.txt_update_email_verify_password);
+        txt_update_email_authenticated = view.findViewById(R.id.txt_update_email_authenticated);
+        btn_update_email = view.findViewById(R.id.btn_update_email);
         loadingBar = new ProgressDialog(getActivity());
 
-        //disable new,confirm pwd and button in the beginning
-        txt_change_password_new.setEnabled(false);
-        txt_change_password_new_confirm.setEnabled(false);
-        btn_change_password.setEnabled(false);
+        btn_update_email.setEnabled(false); //disabled in the beginning until authenticate by user
+        txt_update_email_new.setEnabled(false);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
+        //set old email on TextView
+        oldEmail = currentUser.getEmail();
+        TextView txt_update_email = view.findViewById(R.id.txt_update_email);
+        txt_update_email.setText(oldEmail);
 
         if (currentUser.equals("")) {
             Toast.makeText(getActivity(), "Something went wrong! User's details not available.", Toast.LENGTH_LONG).show();
@@ -75,44 +80,59 @@ public class ProfileChangePasswordFragment extends Fragment {
 
     //ReAuthenticate / verify user before updating email
     private void reAuthenticate(FirebaseUser currentUser) {
-        btn_change_password_authenticate.setOnClickListener(new View.OnClickListener() {
+        Button btn_authenticate_user = view.findViewById(R.id.btn_authenticate_user);
+        btn_authenticate_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentPassword = txt_change_password_current_password.getText().toString().trim();
-
-                if (TextUtils.isEmpty(currentPassword)) {
-                    txt_change_password_current_password.setError("Please enter your current password to continue.");
-                    txt_change_password_current_password.requestFocus();
+                password = txt_update_email_verify_password.getText().toString().trim();
+                if (TextUtils.isEmpty(password)) {
+                    txt_update_email_verify_password.setError("Please enter your password to continue.");
+                    txt_update_email_verify_password.requestFocus();
                 } else {
                     loadingBar.setTitle("User");
                     loadingBar.setMessage("Authenticating...");
                     loadingBar.setCanceledOnTouchOutside(true);
                     loadingBar.show();
 
-                    AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), currentPassword);
+                    AuthCredential credential = EmailAuthProvider.getCredential(oldEmail, password);
                     currentUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 loadingBar.dismiss();
+                                Toast.makeText(getActivity(), "Password has been verified. Your can update email now.", Toast.LENGTH_LONG).show();
+                                txt_update_email_authenticated.setText("You are authenticated. You can update your email now!");
+                                //disable password field and authenticate button
+                                txt_update_email_verify_password.setEnabled(false);
+                                btn_authenticate_user.setEnabled(false);
+                                btn_update_email.setEnabled(true);
+                                txt_update_email_new.setEnabled(true);
 
-                                txt_change_password_current_password.setEnabled(false);
-                                btn_change_password_authenticate.setEnabled(false);
+                                btn_update_email.setBackgroundResource(R.drawable.button_green);
 
-                                txt_change_password_new.setEnabled(true);
-                                txt_change_password_new_confirm.setEnabled(true);
-                                btn_change_password.setEnabled(true);
-
-                                txt_change_password_authenticated.setText("You are authenticated. You can change your password now!");
-
-                                Toast.makeText(getActivity(), "Password has been verified. Your can change your password now.", Toast.LENGTH_LONG).show();
-
-                                btn_change_password.setBackgroundResource(R.drawable.button_green);
-
-                                btn_change_password.setOnClickListener(new View.OnClickListener() {
+                                //update email
+                                btn_update_email.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        changePassword(currentUser);
+                                        newEmail = txt_update_email_new.getText().toString().trim();
+
+                                        if (TextUtils.isEmpty(newEmail)) {
+                                            txt_update_email_new.setError("E-mail is required.");
+                                            txt_update_email_new.requestFocus();
+                                        } else if (!Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) {
+                                            txt_update_email_new.setError("Valid e-mail is required.");
+                                            txt_update_email_new.requestFocus();
+                                        } else if (oldEmail.matches(newEmail)) {
+                                            txt_update_email_new.setError("New email cannot be same as old email.");
+                                            txt_update_email_new.requestFocus();
+                                        } else {
+                                            loadingBar.setTitle("New E-mail");
+                                            loadingBar.setMessage("Updating...");
+                                            loadingBar.setCanceledOnTouchOutside(true);
+                                            loadingBar.show();
+                                            updateEmail(currentUser);
+                                        }
+
                                     }
                                 });
 
@@ -131,55 +151,30 @@ public class ProfileChangePasswordFragment extends Fragment {
         });
     }
 
-    private void changePassword(FirebaseUser currentUser) {
-        String newPassword = txt_change_password_new.getText().toString().trim();
-        String confirmPassword = txt_change_password_new_confirm.getText().toString().trim();
+    private void updateEmail(FirebaseUser currentUser) {
+        currentUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isComplete()) {
+                    //verify email
+                    currentUser.sendEmailVerification();
+                    Toast.makeText(getActivity(), "E-mail has been updated. Please verify your new email.", Toast.LENGTH_LONG).show();
 
-        if (TextUtils.isEmpty(newPassword)) {
-            txt_change_password_new.setError("Password is required.");
-            txt_change_password_new.requestFocus();
-        } else if (newPassword.length() < 6) {
-            txt_change_password_new.setError("Password too weak.");
-            txt_change_password_new.requestFocus();
-        } else if (TextUtils.isEmpty(confirmPassword)) {
-            txt_change_password_new_confirm.setError("Password confirmation is required.");
-            txt_change_password_new_confirm.requestFocus();
-        } else if (!newPassword.equals(confirmPassword)) {
-            txt_change_password_new_confirm.setError("Password & Confirm Password must be match.");
-            txt_change_password_new_confirm.requestFocus();
-            //clear the entered passwords
-            txt_change_password_new.clearComposingText();
-            txt_change_password_new_confirm.clearComposingText();
-        } else if (newPassword.equals(currentPassword)) {
-            txt_change_password_new.setError("New password cannot be same as old password.");
-            txt_change_password_new.requestFocus();
-        } else {
-            loadingBar.setTitle("New Password");
-            loadingBar.setMessage("Changing...");
-            loadingBar.setCanceledOnTouchOutside(true);
-            loadingBar.show();
+                    //send user to profile fragment
+                    Fragment profileFragment = new ProfileFragment();
+                    loadFragment(profileFragment);
 
-            currentUser.updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(), "Password has been changed.", Toast.LENGTH_LONG).show();
-
-                        //send user to profile fragment
-                        Fragment profileFragment = new ProfileFragment();
-                        loadFragment(profileFragment);
-
-                    } else {
-                        try {
-                            throw task.getException();
-                        } catch (Exception e) {
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                } else {
+                    try {
+                        throw task.getException();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-                    loadingBar.dismiss();
                 }
-            });
-        }
+                loadingBar.dismiss();
+            }
+        });
+
     }
 
     //create action bar menu
