@@ -92,7 +92,7 @@ public class NewsAddFragment extends Fragment {
             publishedBy = mAuth.getCurrentUser().getUid();
             News writeNews = new News(newsId, newsHeadline, newsContent, publishedDate, publishedTo, publishedBy);
 
-            dbReferenceNews.child(publishedBy).child(newsId).setValue(writeNews).addOnCompleteListener(new OnCompleteListener<Void>() {
+            dbReferenceNews.child(newsId).setValue(writeNews).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){

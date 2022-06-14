@@ -31,7 +31,7 @@ public class NewsFragment extends Fragment {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-        DatabaseReference dbReferenceNews = FirebaseDatabase.getInstance().getReference("Officer").child("News").child(currentUserId);
+        DatabaseReference dbReferenceNews = FirebaseDatabase.getInstance().getReference("Officer").child("News");
 
         //add new button
         Button btn_add_news = view.findViewById(R.id.btn_add_news);
@@ -45,7 +45,7 @@ public class NewsFragment extends Fragment {
         newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseRecyclerOptions<News> options = new FirebaseRecyclerOptions.Builder<News>()
-                .setQuery(dbReferenceNews, News.class)
+                .setQuery(dbReferenceNews.orderByChild("news_published_by").equalTo(currentUserId), News.class)
                 .build();
 
         newsAdapter = new NewsAdapter(options);

@@ -1,17 +1,9 @@
 package com.haritha.haritha_farmer;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,14 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -37,14 +26,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -55,7 +44,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 
@@ -69,7 +57,8 @@ public class MainFragment extends Fragment {
     private RecyclerView rv_weather;
     private ArrayList<Weather> weatherArrayList;
     private WeatherAdapter weatherAdapter;
-    private String cityName;
+    private NewsAdapter newsAdapter;
+    private String cityName, farmerDistrict;
     private GpsTracker gpsTracker;
 
     @Override
@@ -77,6 +66,37 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        DatabaseReference dbReferenceNews = FirebaseDatabase.getInstance().getReference("Officer").child("News");
+
+        //get Current User district
+        DatabaseReference dbReferenceUser = FirebaseDatabase.getInstance().getReference("Farmer").child("Users");
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        dbReferenceUser.child(currentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists() && (snapshot.hasChild("district"))){
+                    farmerDistrict = Objects.requireNonNull(snapshot.child("district").getValue()).toString();
+                    System.out.println("Farmer District " + farmerDistrict);
+                    //news
+                    RecyclerView newsRecyclerView = view.findViewById(R.id.rv_news);
+                    newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    FirebaseRecyclerOptions<News> options = new FirebaseRecyclerOptions.Builder<News>()
+                            .setQuery(dbReferenceNews.orderByChild("news_publish_to").equalTo(farmerDistrict), News.class)
+                            .build();
+                    newsAdapter = new NewsAdapter(options);
+                    newsRecyclerView.setAdapter(newsAdapter);
+                    newsAdapter.startListening();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //Assign variables
         rl_weather_home = view.findViewById(R.id.rl_weather_home);
@@ -100,7 +120,9 @@ public class MainFragment extends Fragment {
         } catch (Exception e){
             e.printStackTrace();
         }
+
         gpsTracker = new GpsTracker(getActivity());
+
         if(gpsTracker.canGetLocation()){
             double longitude= gpsTracker.getLongitude();
             double latitude = gpsTracker.getLatitude();
@@ -109,8 +131,6 @@ public class MainFragment extends Fragment {
         }else{
             gpsTracker.showSettingsAlert();
         }
-
-
 
         btn_search.setOnClickListener(v -> {
             String city = Objects.requireNonNull(txt_search_city_name.getText()).toString().trim();
@@ -122,7 +142,20 @@ public class MainFragment extends Fragment {
             }
         });
 
+
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        newsAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        newsAdapter.stopListening();
     }
 
     private String getCityName(double longitude, double latitude) {
@@ -179,6 +212,7 @@ public class MainFragment extends Fragment {
                         String windSpeed = hourObj.getString("wind_kph");
                         weatherArrayList.add(new Weather(time, temp, img, windSpeed));
                     }
+
                     weatherAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
