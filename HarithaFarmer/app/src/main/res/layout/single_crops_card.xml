@@ -33,7 +33,7 @@
             android:paddingLeft="24dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="Crop Name"
+            android:text="Loading..."
             android:textColor="@color/white"
             android:textSize="16sp" />
 

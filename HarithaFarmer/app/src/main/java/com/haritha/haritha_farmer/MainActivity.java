@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_seeding:
                     break;
                 case R.id.nav_bio_gas_monitoring:
+                    fragment = new BioGasFragment();
+                    loadFragment(fragment);
                     break;
                 case R.id.nav_watering_and_soilHealth:
                     break;

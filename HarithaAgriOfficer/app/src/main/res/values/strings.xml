@@ -6,6 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="districts">
+        <item>All</item>
         <item>Ampara</item>
         <item>Anuradhapura</item>
         <item>Badulla</item>

@@ -191,56 +191,58 @@ public class ProfileUpdateFragment extends Fragment {
                     rb_update_gender_selected.setChecked(true);
 
                     //show country through spinner
-                    if (district.equals("Ampara")) {
+                    if (district.equals("All")) {
                         sp_update_district.setSelection(0);
-                    } else if (district.equals("Anuradhapura")) {
+                    } else if (district.equals("Ampara")) {
                         sp_update_district.setSelection(1);
-                    } else if (district.equals("Badulla")) {
+                    } else if (district.equals("Anuradhapura")) {
                         sp_update_district.setSelection(2);
-                    } else if (district.equals("Batticaloa")) {
+                    } else if (district.equals("Badulla")) {
                         sp_update_district.setSelection(3);
-                    } else if (district.equals("Colombo")) {
+                    } else if (district.equals("Batticaloa")) {
                         sp_update_district.setSelection(4);
-                    } else if (district.equals("Galle")) {
+                    } else if (district.equals("Colombo")) {
                         sp_update_district.setSelection(5);
-                    } else if (district.equals("Gampaha")) {
+                    } else if (district.equals("Galle")) {
                         sp_update_district.setSelection(6);
-                    } else if (district.equals("Hambantota")) {
+                    } else if (district.equals("Gampaha")) {
                         sp_update_district.setSelection(7);
-                    } else if (district.equals("Jaffna")) {
+                    } else if (district.equals("Hambantota")) {
                         sp_update_district.setSelection(8);
-                    } else if (district.equals("Kalutara")) {
+                    } else if (district.equals("Jaffna")) {
                         sp_update_district.setSelection(9);
-                    } else if (district.equals("Kandy")) {
+                    } else if (district.equals("Kalutara")) {
                         sp_update_district.setSelection(10);
-                    } else if (district.equals("Kegalle")) {
+                    } else if (district.equals("Kandy")) {
                         sp_update_district.setSelection(11);
-                    } else if (district.equals("Kilinochchi")) {
+                    } else if (district.equals("Kegalle")) {
                         sp_update_district.setSelection(12);
-                    } else if (district.equals("Kurunegala")) {
+                    } else if (district.equals("Kilinochchi")) {
                         sp_update_district.setSelection(13);
-                    } else if (district.equals("Mannar")) {
+                    } else if (district.equals("Kurunegala")) {
                         sp_update_district.setSelection(14);
-                    } else if (district.equals("Matale")) {
+                    } else if (district.equals("Mannar")) {
                         sp_update_district.setSelection(15);
-                    } else if (district.equals("Matara")) {
+                    } else if (district.equals("Matale")) {
                         sp_update_district.setSelection(16);
-                    } else if (district.equals("Moneragala")) {
+                    } else if (district.equals("Matara")) {
                         sp_update_district.setSelection(17);
-                    } else if (district.equals("Mullaitivu")) {
+                    } else if (district.equals("Moneragala")) {
                         sp_update_district.setSelection(18);
-                    } else if (district.equals("Nuwara Eliya")) {
+                    } else if (district.equals("Mullaitivu")) {
                         sp_update_district.setSelection(19);
-                    } else if (district.equals("Polonnaruwa")) {
+                    } else if (district.equals("Nuwara Eliya")) {
                         sp_update_district.setSelection(20);
-                    } else if (district.equals("Puttalam")) {
+                    } else if (district.equals("Polonnaruwa")) {
                         sp_update_district.setSelection(21);
-                    } else if (district.equals("Ratnapura")) {
+                    } else if (district.equals("Puttalam")) {
                         sp_update_district.setSelection(22);
-                    } else if (district.equals("Trincomalee")) {
+                    } else if (district.equals("Ratnapura")) {
                         sp_update_district.setSelection(23);
-                    } else if (district.equals("Vavuniya")) {
+                    } else if (district.equals("Trincomalee")) {
                         sp_update_district.setSelection(24);
+                    } else if (district.equals("Vavuniya")) {
+                        sp_update_district.setSelection(25);
                     }
 
                 } else {
