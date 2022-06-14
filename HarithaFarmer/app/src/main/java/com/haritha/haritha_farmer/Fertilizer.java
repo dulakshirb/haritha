@@ -23,16 +23,16 @@ public class Fertilizer {
     }
 
     public String getFertilizer_id(){return fertilizer_id;}
-    public void setFertilizer_id(String fertilizerId){this.fertilizer_id = fertilizerId;}
+    public void setFertilizer_id(String fertilizer_id){this.fertilizer_id = fertilizer_id;}
 
     public String getFertilizer_name(){return fertilizer_name;}
-    public void setFertilizer_name(String fertilizerName){this.fertilizer_name = fertilizer_name;}
+    public void setFertilizer_name(String fertilizer_name){this.fertilizer_name = fertilizer_name;}
 
     public String getFertilizer_description(){return fertilizer_description;}
-    public void setFertilizer_description(String fertilizerDescription){this.fertilizer_description = fertilizer_description;}
+    public void setFertilizer_description(String fertilizer_description){this.fertilizer_description = fertilizer_description;}
 
     public String getFertilizer_crops_touse(){return fertilizer_crops_touse;}
-    public void setFertilizer_crops_touse(String cropsToUse){this.fertilizer_crops_touse = fertilizer_crops_touse;}
+    public void setFertilizer_crops_touse(String fertilizer_crops_touse){this.fertilizer_crops_touse = fertilizer_crops_touse;}
 
     public Float getFertilizer_amount(){return fertilizer_amount;}
     public void setFertilizer_amount(Float fertilizer_amount){this.fertilizer_amount = fertilizer_amount;}

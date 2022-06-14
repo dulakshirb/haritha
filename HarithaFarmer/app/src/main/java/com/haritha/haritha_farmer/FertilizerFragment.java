@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FertilizerFragment extends Fragment {
 
-   // private FertilizerAdapter fertilizerAdapter;
+   private FertilizerAdapter fertilizerAdapter;
     private DatabaseReference dbFertilizer;
 
 
@@ -33,9 +33,9 @@ public class FertilizerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fertilizer, container, false);
 
-//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//        String currentUserID = mAuth.getCurrentUser().getUid();
-//        dbFertilizer = FirebaseDatabase.getInstance().getReference("Farmer").child("Fertilizer").child(currentUserID);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String currentUserID = mAuth.getCurrentUser().getUid();
+        dbFertilizer = FirebaseDatabase.getInstance().getReference("Farmer").child("Fertilizer").child(currentUserID);
 
         Button btnAddFertilizer = (Button) view.findViewById(R.id.btn_add_fertilizer);
 
@@ -46,27 +46,27 @@ public class FertilizerFragment extends Fragment {
 
         });
 
-//        RecyclerView fertilizerRecylerView = (RecyclerView) view.findViewById(R.id.rv_Fertilizer);
-//        fertilizerRecylerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//        FirebaseRecyclerOptions<Fertilizer> options = new FirebaseRecyclerOptions.Builder<Fertilizer>()
-//                .setQuery(dbFertilizer, Fertilizer.class)
-//                .build();
-//
-//        fertilizerAdapter = new FertilizerAdapter(options);
-//        fertilizerRecylerView.setAdapter(fertilizerAdapter);
+        RecyclerView fertilizerRecylerView = (RecyclerView) view.findViewById(R.id.rv_Fertilizer);
+        fertilizerRecylerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        FirebaseRecyclerOptions<Fertilizer> options = new FirebaseRecyclerOptions.Builder<Fertilizer>()
+                .setQuery(dbFertilizer, Fertilizer.class)
+                .build();
+
+        fertilizerAdapter = new FertilizerAdapter(options);
+        fertilizerRecylerView.setAdapter(fertilizerAdapter);
         return view;
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        fertilizerAdapter.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        fertilizerAdapter.stopListening();
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        fertilizerAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        fertilizerAdapter.stopListening();
+    }
 }

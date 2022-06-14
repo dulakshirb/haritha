@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,6 +34,19 @@
             android:textColor="@color/h_light_gray"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizer" />
+
+        <TextView
+            android:id="@+id/txt_fertilizerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="fertilizer"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/txt_heading_update_fertilizerName"
             app:layout_constraintTop_toBottomOf="@+id/txt_heading_fertilizer" />
 
         <Spinner
@@ -148,7 +161,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_heading_update_fertilizerRestockAmount" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_fertilizer_update"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -162,4 +175,4 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_update_fertilizerRestockAmount"
             tools:ignore="DuplicateSpeakableTextCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</ScrollView>
