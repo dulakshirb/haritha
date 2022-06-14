@@ -61,7 +61,7 @@ public class NewsViewFragment extends Fragment {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-        dbReferenceNews = FirebaseDatabase.getInstance().getReference("Officer").child("News").child(currentUserId).child(news_id);
+        dbReferenceNews = FirebaseDatabase.getInstance().getReference("Officer").child("News").child(news_id);
 
         TextView txt_view_newsHeadline = view.findViewById(R.id.txt_view_newsHeadline);
         TextView txt_view_publishedDate = view.findViewById(R.id.txt_view_publishedDate);

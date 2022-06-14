@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,6 +30,20 @@ public class NewsAdapter extends FirebaseRecyclerAdapter<News, NewsAdapter.NewsV
         holder.txt_rv_publishedDate.setText(dateFormat.format(publishedDateInDate));
         holder.txt_rv_newsHeadline.setText(model.getNews_heading());
         holder.txt_rv_newsContent.setText(model.getNews_content());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, new NewsViewFragment(
+                                model.getNews_id(),
+                                model.getNews_heading(),
+                                model.getNews_content(),
+                                model.getNews_published_date(),
+                                model.getNews_publish_to()))
+                        .addToBackStack(null).commit();
+            }
+        });
     }
 
     @NonNull
