@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp"
+    tools:context=".NewsViewFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/txt_heading_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/poppins_bold"
+            android:text="News"
+            android:textColor="@color/h_orange"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/txt_heading_publishTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_heading_news"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="News Publish to"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spinner_publishTo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_publishTo"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/spinner_grey"
+            android:entries="@array/districts"
+            android:padding="20dp" />
+
+
+        <TextView
+            android:id="@+id/txt_heading_publishedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_publishTo"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Published Date"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/calendar_publishedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_heading_publishedDate"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/button_gray"
+            android:padding="20dp"
+            android:text="Choose date"
+            android:textColor="@color/h_gray" />
+
+        <TextView
+            android:id="@+id/txt_heading_newsHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/calendar_publishedDate"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="News Headline"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/txt_newsHeadline"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_heading_newsHeadline"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColor="@color/black" />
+
+
+
+        <TextView
+            android:id="@+id/txt_heading_newsContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_newsHeadline"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="News Content"
+            android:textColor="@color/h_light_gray"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/txt_newsContent"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/txt_heading_newsContent"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edittext_grey"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_UpdateNews"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/txt_newsContent"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

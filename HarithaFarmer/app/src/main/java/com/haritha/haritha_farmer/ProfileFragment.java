@@ -4,8 +4,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,14 +28,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
+    private View view;
     private TextView txt_show_farm_name, txt_show_name, txt_show_email,
-            txt_show_phone, txt_show_gender, txt_show_location, txt_show_country;
+            txt_show_phone, txt_show_gender, txt_show_location, txt_show_district;
     private ImageView img_profile;
     private ProgressDialog loadingBar;
-    private String farmName, name, email, phone, gender, location, country;
+    private String farmName, name, email, phone, gender, location, district;
     private FirebaseAuth mAuth;
 
     public ProfileFragment() {
@@ -38,7 +46,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         txt_show_farm_name = view.findViewById(R.id.txt_show_farm_name);
         txt_show_name = view.findViewById(R.id.txt_show_name);
@@ -46,8 +54,19 @@ public class ProfileFragment extends Fragment {
         txt_show_phone = view.findViewById(R.id.txt_show_phone);
         txt_show_gender = view.findViewById(R.id.txt_show_gender);
         txt_show_location = view.findViewById(R.id.txt_show_location);
-        txt_show_country = view.findViewById(R.id.txt_show_country);
+        txt_show_district = view.findViewById(R.id.txt_show_district);
         loadingBar = new ProgressDialog(getActivity());
+
+        //set onClickListener on ImageView to Open ProfilePictureUploadFragment
+        img_profile = view.findViewById(R.id.img_profile);
+        img_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Fragment profilePictureUploadFragment = new ProfilePictureUploadFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, profilePictureUploadFragment).addToBackStack(null).commit();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -67,7 +86,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void checkIfEmailVerified(FirebaseUser currentUser) {
-        if(!currentUser.isEmailVerified()){
+        if (!currentUser.isEmailVerified()) {
             showAlertDialog();
         }
     }
@@ -107,7 +126,7 @@ public class ProfileFragment extends Fragment {
                     gender = readUserDetails.gender;
                     farmName = readUserDetails.farmName;
                     location = readUserDetails.location;
-                    country = readUserDetails.country;
+                    district = readUserDetails.district;
 
                     txt_show_farm_name.setText(farmName);
                     txt_show_name.setText(name);
@@ -115,7 +134,16 @@ public class ProfileFragment extends Fragment {
                     txt_show_phone.setText(phone);
                     txt_show_gender.setText(gender);
                     txt_show_location.setText(location);
-                    txt_show_country.setText(country);
+                    txt_show_district.setText(district);
+
+                    //Set user DP
+                    if (currentUser.getPhotoUrl() != null) {
+                        Uri uri = currentUser.getPhotoUrl();
+                        Picasso.get().load(uri).into(img_profile);
+                    }
+
+                } else {
+                    Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                 }
                 loadingBar.dismiss();
             }
@@ -128,4 +156,55 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    //create action bar menu
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.profile_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    //when any menu item is selected
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        Fragment fragment = null;
+        if (id == R.id.menu_update_profile) {
+            fragment = new ProfileUpdateFragment();
+            loadFragment(fragment);
+        } else if (id == R.id.menu_update_email) {
+            fragment = new ProfileUpdateEmailFragment();
+            loadFragment(fragment);
+        } else if (id == R.id.menu_change_password) {
+            fragment = new ProfileChangePasswordFragment();
+            loadFragment(fragment);
+        } else if (id == R.id.menu_delete_profile) {
+            fragment = new ProfileDeleteFragment();
+            loadFragment(fragment);
+        } else if (id == R.id.menu_logout) {
+            mAuth.signOut();
+            Toast.makeText(getActivity(), "Logged Out", Toast.LENGTH_SHORT).show();
+            sendUserToMainActivity();
+        } else {
+            Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+    }
+
+    private void sendUserToMainActivity() {
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainIntent);
+        getActivity().finish();
+    }
 }

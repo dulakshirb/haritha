@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+<!--    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
@@ -26,6 +26,27 @@
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/h_gradient_dark_green"
+        android:fitsSystemWindows="true"
+        android:elevation="1dp"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/AppTheme.popUpOverlay"
+        app:title="Haritha"
+        app:titleTextColor="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

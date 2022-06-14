@@ -42,7 +42,7 @@ public class CropsAddFragment extends Fragment {
     private ProgressDialog loadingBar;
 
     private String planted_date;
-    private DatabaseReference dbCrop;
+    private DatabaseReference dbReferenceCrop;
 
     public CropsAddFragment() {
     }
@@ -55,7 +55,7 @@ public class CropsAddFragment extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String currentUserId;
         currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-        dbCrop = FirebaseDatabase.getInstance().getReference("Farmer").child("Crop").child(currentUserId);
+        dbReferenceCrop = FirebaseDatabase.getInstance().getReference("Farmer").child("Crop").child(currentUserId);
 
         initializeFields();
         selectPlantedDate();
@@ -187,14 +187,14 @@ public class CropsAddFragment extends Fragment {
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
 
-        String crop_id = dbCrop.push().getKey();
+        String crop_id = dbReferenceCrop.push().getKey();
         Crop crop = new Crop(crop_id, crop_type, crop_name, crop_variety, botanical_name, planted_date,
                 start_method, light_profile, planting_details, days_to_emerge, harvest_unit, days_to_maturity,
                 harvest_window, plant_spacing, row_spacing, planting_depth, estimated_revenue, expected_yield);
 
         assert crop_id != null;
-        dbCrop.child(crop_id).setValue(crop);
-        System.out.println(dbCrop.child(crop_id).setValue(crop));
+        dbReferenceCrop.child(crop_id).setValue(crop);
+        System.out.println(dbReferenceCrop.child(crop_id).setValue(crop));
         sendUserCropsFragment();
         loadingBar.dismiss();
 

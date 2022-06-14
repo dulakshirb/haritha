@@ -12,7 +12,7 @@
         android:id="@+id/img_loggedin_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:src="@drawable/pro_pic"
         app:civ_border_color="@color/h_orange"
@@ -21,7 +21,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_marginBottom="15dp"
         android:layout_toEndOf="@+id/img_loggedin_profile"
         android:layout_marginLeft="20dp"
         android:layout_alignParentBottom="true"

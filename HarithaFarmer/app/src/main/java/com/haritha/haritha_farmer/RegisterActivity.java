@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -18,9 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
             txt_register_confirmed_password;
     private RadioGroup rg_gender_group;
     private RadioButton rb_register_gender_selected;
-    private Spinner sp_register_country;
+    private Spinner sp_register_district;
     private static final String TAG = "RegisterActivity";
     private ProgressDialog loadingBar;
 
@@ -56,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         txt_register_location = findViewById(R.id.txt_register_location);
         txt_register_password = findViewById(R.id.txt_register_password);
         txt_register_confirmed_password = findViewById(R.id.txt_register_confirmed_password);
-        sp_register_country = findViewById(R.id.sp_register_country);
+        sp_register_district = findViewById(R.id.sp_register_district);
         rg_gender_group = findViewById(R.id.rg_gender_group);
         rg_gender_group.clearCheck();
         loadingBar = new ProgressDialog(this);
@@ -77,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
             String txtLocation = txt_register_location.getText().toString().trim();
             String txtPassword = txt_register_password.getText().toString().trim();
             String txtConfirmedPassword = txt_register_confirmed_password.getText().toString().trim();
-            String txtCountry;
+            String txtDistrict;
             String txtGender;
 
             if (TextUtils.isEmpty(txtUserName)) {
@@ -119,13 +114,13 @@ public class RegisterActivity extends AppCompatActivity {
                 txt_register_password.clearComposingText();
                 txt_register_confirmed_password.clearComposingText();
             } else {
-                txtCountry = sp_register_country.getSelectedItem().toString();
+                txtDistrict = sp_register_district.getSelectedItem().toString();
                 txtGender = rb_register_gender_selected.getText().toString();
                 loadingBar.setTitle("Creating New Account");
                 loadingBar.setMessage("Please wait, while we are creating new account for you...");
                 loadingBar.setCanceledOnTouchOutside(true);
                 loadingBar.show();
-                registerUser(txtUserName, txtEmail, txtMobile, txtGender, txtFarmName, txtLocation, txtCountry, txtPassword);
+                registerUser(txtUserName, txtEmail, txtMobile, txtGender, txtFarmName, txtLocation, txtDistrict, txtPassword);
             }
         });
 
@@ -134,8 +129,9 @@ public class RegisterActivity extends AppCompatActivity {
         already_have_an_account_link.setOnClickListener(view -> sendUserToLoginActivity());
     }
 
+
     //register user using the credentials given
-    private void registerUser(String txtUserName, String txtEmail, String txtMobile, String txtGender, String txtFarmName, String txtLocation, String txtCountry, String txtPassword) {
+    private void registerUser(String txtUserName, String txtEmail, String txtMobile, String txtGender, String txtFarmName, String txtLocation, String txtDistrict, String txtPassword) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -148,7 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseUser.updateProfile(profileChangeRequest);
 
                     //Enter user data into the Firebase Realtime Database
-                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(txtMobile, txtGender, txtFarmName, txtLocation, txtCountry);
+                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(txtMobile, txtGender, txtFarmName, txtLocation, txtDistrict);
                     //Extracting user reference from database for registered users
                     DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Farmer").child("Users");
                     referenceUsers.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -163,9 +163,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendUserToForgetPasswordActivity() {
         Intent forgetPasswordIntent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-        forgetPasswordIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+       // forgetPasswordIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(forgetPasswordIntent);
-        finish();
+        //finish();
     }
 
     //check if user is already logged in.

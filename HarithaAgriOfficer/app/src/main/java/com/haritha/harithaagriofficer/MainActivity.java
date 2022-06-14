@@ -1,5 +1,12 @@
 package com.haritha.harithaagriofficer;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,12 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,17 +25,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.haritha.harithaagriofficer.FarmFragment;
+import com.haritha.harithaagriofficer.MainFragment;
+import com.haritha.harithaagriofficer.TaskAndScheduleFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MainActivity extends AppCompatActivity {
-
     private DrawerLayout drawerLayout;
+
     private TextView loggedInUserName, loggedInUserEmail;
-    private CircleImageView loggedInUserProfileImage;
+    private ImageView loggedInUserProfileImage;
 
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
@@ -55,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         View navHeaderView = navigationView.getHeaderView(0);
-        loggedInUserName = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_username);
-        loggedInUserEmail = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_email);
-        loggedInUserProfileImage = (CircleImageView) navHeaderView.findViewById(R.id.img_loggedin_profile);
+        loggedInUserName =  navHeaderView.findViewById(R.id.txt_loggedin_username);
+        loggedInUserEmail =  navHeaderView.findViewById(R.id.txt_loggedin_email);
+        loggedInUserProfileImage =  navHeaderView.findViewById(R.id.img_loggedin_profile);
 
         Fragment defaultFragment = new MainFragment();
         loadFragment(defaultFragment);
@@ -103,11 +105,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
 
         if (currentUser == null) {
             sendUserToLoginActivity();
@@ -121,19 +124,20 @@ public class MainActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if ((snapshot.exists()) && (snapshot.hasChild("userName") && snapshot.hasChild("image"))) {
-                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("userName").getValue()).toString();
-                            String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
+                        if ((snapshot.exists()) && (snapshot.hasChild("district"))) {
+                            //String retLoggedInUserName = Objects.requireNonNull(snapshot.child(currentUser.getDisplayName())).toString();
+                            //String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
                             loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(retLoggedInUserName);
-                            Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
-                        } else if ((snapshot.exists()) && (snapshot.hasChild("userName"))) {
-                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("userName").getValue()).toString();
-                            loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(retLoggedInUserName);
-                        } else {
+                            loggedInUserName.setText(currentUser.getDisplayName());
+
+                            if(currentUser.getPhotoUrl() != null){
+                                Uri uri = currentUser.getPhotoUrl();
+                                Picasso.get().load(uri).into(loggedInUserProfileImage);
+                            }
+                            //   Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
+                        }else {
                             sendUserToProfileFragment();
-                            Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -152,12 +156,23 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (currentUser == null) {
+            sendUserToLoginActivity();
+        } else {
+            verifyUserExistence();
+        }
+    }
+
     private void verifyUserExistence() {
         String currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         rootRef.child("Officer").child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if ((snapshot.child("userName").exists())) {
+                if ((snapshot.child("district").exists())) {
                     //Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
                     retrieveLoggedInUserInfo();
                 } else {
@@ -172,6 +187,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void sendUserToProfileFragment() {
+        Fragment fragment = new ProfileFragment();
+        loadFragment(fragment);
+    }
+
     private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -179,8 +199,4 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void sendUserToProfileFragment() {
-        Fragment fragment = new ProfileFragment();
-        loadFragment(fragment);
-    }
 }

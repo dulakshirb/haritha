@@ -1,19 +1,16 @@
 package com.haritha.haritha_farmer;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -32,19 +29,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
 
     private TextView loggedInUserName, loggedInUserEmail;
-    private CircleImageView loggedInUserProfileImage;
+    private ImageView loggedInUserProfileImage;
 
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
-
-    private int PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         View navHeaderView = navigationView.getHeaderView(0);
-        loggedInUserName = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_username);
-        loggedInUserEmail = (TextView) navHeaderView.findViewById(R.id.txt_loggedin_email);
-        loggedInUserProfileImage = (CircleImageView) navHeaderView.findViewById(R.id.img_loggedin_profile);
+        loggedInUserName =  navHeaderView.findViewById(R.id.txt_loggedin_username);
+        loggedInUserEmail =  navHeaderView.findViewById(R.id.txt_loggedin_email);
+        loggedInUserProfileImage =  navHeaderView.findViewById(R.id.img_loggedin_profile);
 
         Fragment defaultFragment = new MainFragment();
         loadFragment(defaultFragment);
@@ -94,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_seeding:
                     break;
-                case R.id.nav_predictive_analytics:
-                    break;
-                case R.id.nav_security:
+                case R.id.nav_bio_gas_monitoring:
+                    fragment = new BioGasFragment();
+                    loadFragment(fragment);
                     break;
                 case R.id.nav_watering_and_soilHealth:
                     break;
@@ -107,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(fragment);
                     break;
                 case R.id.nav_support:
+                    fragment = new SupportFragment();
+                    loadFragment(fragment);
                     break;
                 case R.id.nav_logout:
                     if (item.getItemId() == R.id.nav_logout) {
@@ -118,9 +113,21 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
 
+
             return true;
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (currentUser == null) {
+            sendUserToLoginActivity();
+        } else {
+            verifyUserExistence();
+        }
     }
 
     private void retrieveLoggedInUserInfo() {
@@ -128,19 +135,20 @@ public class MainActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if ((snapshot.exists()) && (snapshot.hasChild("farmName") && snapshot.hasChild("image"))) {
-                            //String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
+                        if ((snapshot.exists()) && (snapshot.hasChild("farmName"))) {
+                            String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
                             //String retLoggedInUserProfileImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
                             loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(currentUser.getDisplayName());
+                            loggedInUserName.setText(retLoggedInUserName);
+
+                            if(currentUser.getPhotoUrl() != null){
+                                Uri uri = currentUser.getPhotoUrl();
+                                Picasso.get().load(uri).into(loggedInUserProfileImage);
+                            }
                          //   Picasso.get().load(retLoggedInUserProfileImage).into(loggedInUserProfileImage);
-                        } else if ((snapshot.exists()) && (snapshot.hasChild("farmName"))) {
-                          //  String retLoggedInUserName = Objects.requireNonNull(snapshot.child("farmName").getValue()).toString();
-                            loggedInUserEmail.setText(currentUser.getEmail());
-                            loggedInUserName.setText(currentUser.getDisplayName());
-                        } else {
+                        }else {
                             sendUserToProfileFragment();
-                            Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(MainActivity.this, "Please set & update your profile information.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
