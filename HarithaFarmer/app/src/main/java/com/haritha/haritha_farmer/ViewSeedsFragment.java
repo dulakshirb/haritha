@@ -70,10 +70,10 @@ public class ViewSeedsFragment extends Fragment {
         String currentUserID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         dbSeeds = FirebaseDatabase.getInstance().getReference("Farmer").child("Seeds").child(currentUserID).child(seed_id);
 
-       // viewSeedsFragmentFieldsInitializing();
+       viewSeedsFragmentFieldsInitializing();
         viewSeedsFragmentSetValues();
 
-        //Remove button on cropViewFragment
+
         deleteDialogInitializing();
         btnRemove.setOnClickListener(remove -> {
             deleteDialog.show();
@@ -90,7 +90,7 @@ public class ViewSeedsFragment extends Fragment {
 
         btnEdit.setOnClickListener(edit -> {
 
-          //  onEditPressed();
+          onEditPressed();
         });
 
 
@@ -109,7 +109,7 @@ public class ViewSeedsFragment extends Fragment {
         btnCancel = deleteDialog.findViewById(R.id.btn_dialog_cancel);
         btnDelete = deleteDialog.findViewById(R.id.btn_dialog_delete);
     }
-    private void viewFertilizerFragmentFieldsInitializing() {
+    private void viewSeedsFragmentFieldsInitializing() {
         txt_viewSName = (TextView) view.findViewById(R.id.txt_viewSName);
         txt_viewSDescription = (TextView) view.findViewById(R.id.txt_viewSDescription);
         txt_viewSVariety = (TextView) view.findViewById(R.id.txt_viewSVariety);
