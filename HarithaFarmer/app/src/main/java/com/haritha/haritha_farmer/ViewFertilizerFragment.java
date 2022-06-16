@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 
 public class ViewFertilizerFragment extends Fragment {
 
@@ -44,6 +46,7 @@ public class ViewFertilizerFragment extends Fragment {
 
     public ViewFertilizerFragment(String fertilizer_id, String fertilizer_name, String fertilizer_description, String fertilizer_crops_touse, Float fertilizer_amount, Float fertilizer_restock_amount) {
         this.fertilizer_id = fertilizer_id;
+        this.fertilizer_name = fertilizer_name;
         this.fertilizer_description = fertilizer_description;
         this.fertilizer_crops_touse = fertilizer_crops_touse;
         this.fertilizer_amount = fertilizer_amount;
@@ -55,15 +58,15 @@ public class ViewFertilizerFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_view_fertilizer, container, false);
 
-        //Database reference and get current user Id
+       // Database reference and get current user Id
         mAuth = FirebaseAuth.getInstance();
-       // currentUserID = mAuth.getCurrentUser().getUid();
-       // dbFertilizer = FirebaseDatabase.getInstance().getReference("Farmer").child("Fertilizer").child(currentUserId).child(fertilizerId);
+        String currentUserID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+       dbFertilizer = FirebaseDatabase.getInstance().getReference("Farmer").child("Fertilizer").child(currentUserID).child(fertilizer_id);
 
         viewFertilizerFragmentFieldsInitializing();
         viewFertilizerFragmentSetValues();
 
-        //Remove button on cropViewFragment
+
         deleteDialogInitializing();
         btnRemove.setOnClickListener(remove -> {
             deleteDialog.show();
@@ -74,13 +77,13 @@ public class ViewFertilizerFragment extends Fragment {
         });
 
         btnDelete.setOnClickListener(deleteBtn -> {
-           // deleteFertilizer(fertilizerId);
+            deleteFertilizer();
             deleteDialog.dismiss();
         });
 
         btnEdit.setOnClickListener(edit -> {
 
-            //onEditPressed();
+            onEditPressed();
         });
 
 
@@ -118,14 +121,74 @@ public class ViewFertilizerFragment extends Fragment {
         txt_viewFRestockAmount.setText(fertilizer_restock_amount.toString());
     }
 
-    private void deleteFertilizer(String cropId) {
-        dbFertilizer.removeValue();
+    private void deleteFertilizer() {
+        if (dbFertilizer != null)
+            dbFertilizer.removeValue();
         sendUsertoFertilizerFragment();
+    }
+
+    public void onEditPressed(){
+
+        //open fragment_update_fertilizer dialog
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.fragment_update_fertilizer, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText txt_fertilizerName = dialogView.findViewById(R.id.txt_fertilizerName);
+        final Spinner spinner_update_fertilizerName = dialogView.findViewById(R.id.spinner_update_fertilizerName);
+        final EditText txt_update_fertilizerDescription = dialogView.findViewById(R.id.txt_update_fertilizerDescription);
+        final EditText txt_update_fertilizerCrops = dialogView.findViewById(R.id.txt_update_fertilizerCrops);
+        final EditText txt_update_fertilizerAmount = dialogView.findViewById(R.id.txt_update_fertilizerAmount);
+        final EditText txt_update_fertilizerRestockAmount = dialogView.findViewById(R.id.txt_update_fertilizerRestockAmount);
+
+        Button btnUpdateFertilizer = dialogView.findViewById(R.id.btn_fertilizer_update);
+        dialogBuilder.setTitle("Updating " + fertilizer_name);
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        txt_fertilizerName.setText(fertilizer_name);
+        txt_update_fertilizerDescription.setText(fertilizer_description);
+        txt_update_fertilizerCrops.setText(fertilizer_crops_touse);
+        txt_update_fertilizerAmount.setText(String.valueOf(fertilizer_amount));
+        txt_update_fertilizerRestockAmount.setText(String.valueOf(fertilizer_restock_amount));
+
+        btnUpdateFertilizer.setOnClickListener(view1 -> {
+            if (!Objects.equals(fertilizer_name, spinner_update_fertilizerName.getSelectedItem().toString()))
+                fertilizer_name = spinner_update_fertilizerName.getSelectedItem().toString();
+            if (txt_update_fertilizerDescription.getText().toString().trim().isEmpty()) {
+                txt_update_fertilizerDescription.setError("This field is required!");
+                txt_update_fertilizerDescription.requestFocus();
+                return;
+            }
+            fertilizer_crops_touse = txt_update_fertilizerCrops.getText().toString().trim();
+            fertilizer_amount = Float.parseFloat(txt_update_fertilizerAmount.getText().toString().trim());
+            fertilizer_restock_amount = Float.parseFloat(txt_update_fertilizerRestockAmount.getText().toString().trim());
+
+            if (updateFertilizer(fertilizer_id, fertilizer_name, fertilizer_description, fertilizer_crops_touse, fertilizer_amount, fertilizer_restock_amount)) {
+                alertDialog.dismiss();
+                sendUsertoFertilizerFragment();
+            } else {
+                Toast.makeText(getActivity(), "Failed to update, please try again!", Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
     }
     private void sendUsertoFertilizerFragment() {
         AppCompatActivity activity = (AppCompatActivity) view.getContext();
         Fragment fertilizerFragment = new FertilizerFragment();
         activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fertilizerFragment).addToBackStack(null).commit();
+    }
+
+    private boolean updateFertilizer(String fertilizer_id, String fertilizer_name, String fertilizer_description, String fertilizer_crops_touse, Float fertilizer_amount,
+                               Float fertilizer_restock_amount) {
+
+        Fertilizer fertilizer = new Fertilizer(fertilizer_id, fertilizer_name, fertilizer_description, fertilizer_crops_touse, fertilizer_amount, fertilizer_restock_amount);
+
+
+        dbFertilizer.setValue(fertilizer);
+        return true;
     }
 
 
