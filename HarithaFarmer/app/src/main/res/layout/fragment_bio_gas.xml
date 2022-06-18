@@ -30,12 +30,12 @@
             android:background="@drawable/button_red"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/white"
-            android:textOff="OFF"
-            android:textOn="ON"
+            android:textOff="Unit Off"
+            android:textOn="Unit On"
             android:textSize="16sp" />
 
         <LinearLayout
-            android:id="@+id/bg_status_of_plant"
+            android:id="@+id/bg_of_plant_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_heading_biogas"
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="LPG Level : "
+                    android:text="Gas Level : "
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -133,6 +133,237 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bg_of_input_wastage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bg_of_plant_status"
+            android:layout_marginTop="20dp"
+            android:background="@color/h_lightest_gray"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/register_title_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Wastage"
+                android:textColor="@color/h_gray"
+                android:textSize="18sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/heading_input_wastage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Input Wastage (kg)"
+                    android:textColor="@color/h_gray"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txt_input_wastage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/edittext_grey"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_addWastage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_green"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/heading_currentInputStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Current Input Status: "
+                    android:textColor="@color/h_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_view_currentInputStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="0"
+                    android:textColor="@color/h_gray"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_resetWastage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_gray"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="15dp"
+                android:text="Reset Current Wastage"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bg_of_other_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bg_of_input_wastage"
+            android:layout_marginTop="20dp"
+            android:background="@color/h_lightest_gray"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/register_title_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Other Details"
+                android:textColor="@color/h_gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/heading_startDateToCollectWastage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Started date to collect wastage "
+                android:textColor="@color/h_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_view_startDateToCollectWastage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Currently unavailable"
+                android:textColor="@color/h_warning_red"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_view_daysSpend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="0"
+                    android:textColor="@color/h_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/heading_view_daysSpend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="days pass"
+                    android:textColor="@color/h_gray"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bg_of_sell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bg_of_other_details"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="70dp"
+            android:background="@color/h_lightest_gray"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/register_title_four"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Sell"
+                android:textColor="@color/h_gray"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/heading_cylinders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Cylinders : "
+                    android:textColor="@color/h_gray"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txt_cylinders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/edittext_grey"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submitToSell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_green"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Submit to Sell"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

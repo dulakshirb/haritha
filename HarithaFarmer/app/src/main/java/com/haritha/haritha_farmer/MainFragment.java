@@ -149,13 +149,13 @@ public class MainFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        newsAdapter.startListening();
+   //     newsAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        newsAdapter.stopListening();
+//        newsAdapter.stopListening();
     }
 
     private String getCityName(double longitude, double latitude) {

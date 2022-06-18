@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.app.AlertDialog;
 
 import android.app.Dialog;
-import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,7 +121,7 @@ public class ViewFertilizerFragment extends Fragment {
     private void deleteFertilizer() {
         if (dbFertilizer != null)
             dbFertilizer.removeValue();
-        sendUsertoFertilizerFragment();
+        sendUserToFertilizerFragment();
     }
 
     public void onEditPressed(){
@@ -167,7 +164,7 @@ public class ViewFertilizerFragment extends Fragment {
 
             if (updateFertilizer(fertilizer_id, fertilizer_name, fertilizer_description, fertilizer_crops_touse, fertilizer_amount, fertilizer_restock_amount)) {
                 alertDialog.dismiss();
-                sendUsertoFertilizerFragment();
+                sendUserToFertilizerFragment();
             } else {
                 Toast.makeText(getActivity(), "Failed to update, please try again!", Toast.LENGTH_SHORT).show();
             }
@@ -175,7 +172,7 @@ public class ViewFertilizerFragment extends Fragment {
 
         });
     }
-    private void sendUsertoFertilizerFragment() {
+    private void sendUserToFertilizerFragment() {
         AppCompatActivity activity = (AppCompatActivity) view.getContext();
         Fragment fertilizerFragment = new FertilizerFragment();
         activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fertilizerFragment).addToBackStack(null).commit();
