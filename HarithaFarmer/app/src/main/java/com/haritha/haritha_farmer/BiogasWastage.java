@@ -1,8 +1,8 @@
 package com.haritha.haritha_farmer;
 
 public class BiogasWastage {
-    public Float wastage_amount;
-    public String started_date;
+    private Float wastage_amount;
+    private String started_date;
 
     public BiogasWastage(){}
 
