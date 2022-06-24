@@ -49,6 +49,10 @@ public class BioGasFragment extends Fragment {
     private float current_wastage_amount = (float) 0 , input_wastage = (float) 0;
     private BiogasAdapter biogasAdapter;
 
+    public BioGasFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -148,15 +152,12 @@ public class BioGasFragment extends Fragment {
         });
 
         //sell cylinders
-        btn_submitToSell.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if((txt_cylinders.getText().toString().trim()).isEmpty()){
-                    txt_cylinders.setError("This field is required.");
-                    txt_cylinders.requestFocus();
-                }
-                listToSellCylinder();
+        btn_submitToSell.setOnClickListener(view18 -> {
+            if((txt_cylinders.getText().toString().trim()).isEmpty()){
+                txt_cylinders.setError("This field is required.");
+                txt_cylinders.requestFocus();
             }
+            listToSellCylinder();
         });
 
         //view sell cylinders
