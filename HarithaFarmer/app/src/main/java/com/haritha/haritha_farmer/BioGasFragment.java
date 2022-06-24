@@ -46,7 +46,7 @@ public class BioGasFragment extends Fragment {
     private Dialog addDialogConfirmation, resetDialogConfirmation;
     private LinearLayout bg_status_of_plant, bg_of_other_details;
     private DatabaseReference dbReferenceBioGas;
-    private float current_wastage_amount = 0, input_wastage = 0;
+    private float current_wastage_amount = (float) 0 , input_wastage = (float) 0;
     private BiogasAdapter biogasAdapter;
 
     @Override
@@ -195,11 +195,13 @@ public class BioGasFragment extends Fragment {
         BiogasSell biogasSell = new BiogasSell(cylinders, String.valueOf(today));
         assert sell_id != null;
         dbReferenceBioGas.child("sell").child(sell_id).setValue(biogasSell);
+        txt_cylinders.setText("");
     }
 
     private void resetWastage() {
         dbReferenceBioGas.child("wastage").child("wastage_amount").setValue(0);
         bg_of_other_details.setVisibility(View.GONE);
+        current_wastage_amount = 0;
     }
 
     private void inputWastage() {
@@ -207,8 +209,10 @@ public class BioGasFragment extends Fragment {
             //current date
             Calendar calendarToday = Calendar.getInstance();
             long today = calendarToday.getTimeInMillis();
-            BiogasWastage biogasWastage = new BiogasWastage(input_wastage, String.valueOf(today));
-            dbReferenceBioGas.child("wastage").setValue(biogasWastage);
+            current_wastage_amount = current_wastage_amount + input_wastage;
+            System.out.println("current_wastage_amount " + current_wastage_amount);
+            dbReferenceBioGas.child("wastage").child("wastage_amount").setValue(current_wastage_amount);
+            dbReferenceBioGas.child("wastage").child("started_date").setValue(String.valueOf(today));
         } else {
             current_wastage_amount = current_wastage_amount + input_wastage;
             dbReferenceBioGas.child("wastage").child("wastage_amount").setValue(current_wastage_amount);
@@ -245,6 +249,7 @@ public class BioGasFragment extends Fragment {
         dbReferenceBioGas.child("unit").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                showCurrentWastage();
                 BiogasUnit biogasUnit = snapshot.getValue(BiogasUnit.class);
                 if (biogasUnit != null) {
                     if (biogasUnit.status == 0) {

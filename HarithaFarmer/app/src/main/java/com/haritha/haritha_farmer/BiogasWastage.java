@@ -10,4 +10,5 @@ public class BiogasWastage {
         this.wastage_amount = wastage_amount;
         this.started_date = started_date;
     }
+
 }
