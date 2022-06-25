@@ -257,12 +257,10 @@ public class BioGasFragment extends Fragment {
                         showBioGasPlantStatus();
                         register_title_one.setText("Last status in Bio Gas Plant");
                         btn_on_off_bioGasUnit.setTextOff("Unit Off");
-                        //    btn_on_off_bioGasUnit.setBackgroundResource(R.drawable.button_red);
                     } else if (biogasUnit.status == 1) {
                         showBioGasPlantStatus();
                         register_title_one.setText("Current status in Bio Gas Plant");
                         btn_on_off_bioGasUnit.setTextOn("Unit On");
-                        //    btn_on_off_bioGasUnit.setBackgroundResource(R.drawable.button_green);
                     }
                 }
             }
