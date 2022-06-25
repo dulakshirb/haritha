@@ -205,7 +205,7 @@
             >
         </RelativeLayout>
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_margin="20dp"
@@ -215,7 +215,7 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/img_rSecurity"
+                android:id="@+id/img_rBiogas"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_weight="1"
@@ -223,7 +223,7 @@
                 android:src="@drawable/biogas" />
 
             >
-        </RelativeLayout>
+        </RelativeLayout>-->
 
     </LinearLayout>
 

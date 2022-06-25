@@ -14,4 +14,20 @@ public class BiogasUnit {
         this.humidity = humidity;
         this.status = status;
     }
+
+    public Double getLpg() {
+        return lpg;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public Double getHumidity() {
+        return humidity;
+    }
+
+    public int getStatus() {
+        return status;
+    }
 }

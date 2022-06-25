@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 public class ReportsFragment extends Fragment {
 
-    private ImageView img_rCrops;
+    private ImageView img_rCrops, img_rBiogas;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +30,7 @@ public class ReportsFragment extends Fragment {
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, reportCropFragment).addToBackStack(null).commit();
             }
         });
+
 
         return view;
     }
