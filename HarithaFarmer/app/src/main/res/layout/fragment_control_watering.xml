@@ -20,6 +20,19 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/txt_watering"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Watering"
+                android:textColor="@color/h_warning_red"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_waterOn" />
+
+            <TextView
                 android:id="@+id/txt_heading_watering"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,8 +52,8 @@
                 android:layout_marginTop="36dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Soil Health :"
-                android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textColor="@color/h_gray"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_heading_watering" />
 
@@ -48,26 +61,14 @@
                 android:id="@+id/txt_soil_health"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="17dp"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Soil Health"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_water"
-                app:layout_constraintStart_toEndOf="@+id/txt_heading_soil_health" />
-
-            <ToggleButton
-                android:id="@+id/btn_water"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/button_green"
-                android:textOff="OFF"
-                android:textOn="ON"
-                app:layout_constraintStart_toEndOf="@+id/txt_history_Security"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="132dp" />
+                app:layout_constraintStart_toEndOf="@+id/txt_heading_soil_health"
+                tools:layout_editor_absoluteY="81dp"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/txt_history_Security"
@@ -77,10 +78,37 @@
                 android:layout_marginTop="28dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Start Watering"
-                android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textColor="@color/h_gray"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_heading_soil_health" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_waterOn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button_green_on"
+                android:fontFamily="@font/poppins_bold"
+                android:text="ON"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/txt_history_Security"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="126dp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_waterOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button_red_off"
+                android:fontFamily="@font/poppins_bold"
+                android:text="OFF"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/btn_waterOn"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="126dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
