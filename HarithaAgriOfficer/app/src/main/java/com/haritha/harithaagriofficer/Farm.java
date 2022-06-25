@@ -1,7 +1,7 @@
 package com.haritha.harithaagriofficer;
 
 public class Farm {
-    private String farm_id;
+    private String userId;
     private String farmName;
     private String userName;
     private String district;
@@ -10,10 +10,11 @@ public class Farm {
     private String email;
     private String mobile;
 
-    public Farm(){}
+    public Farm() {
+    }
 
-    public Farm(String farm_id, String farm_name, String owner_name, String district, String gender, String location, String email, String phone) {
-        this.farm_id = farm_id;
+    public Farm(String userId, String farm_name, String owner_name, String district, String gender, String location, String email, String phone) {
+        this.userId = userId;
         this.farmName = farm_name;
         this.userName = owner_name;
         this.district = district;
@@ -23,8 +24,8 @@ public class Farm {
         this.mobile = phone;
     }
 
-    public String getFarm_id() {
-        return farm_id;
+    public String getUserId() {
+        return userId;
     }
 
     public String getFarmName() {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".SupportFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:background="@color/h_gradient_dark_green">
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/haritha_logo_white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/el_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="harithamobileapp@gmail.com"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/h_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txt_email"
+            android:layout_marginTop="30dp"
+            android:text="+94 11 200 0000"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/h_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txt_phone"
+            android:layout_marginTop="30dp"
+            android:text="HQ: Sri Lanka"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/h_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_regular"
+            android:text="© 2022 Haritha. All rights reserved."
+            android:textColor="@color/h_gray"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</LinearLayout>

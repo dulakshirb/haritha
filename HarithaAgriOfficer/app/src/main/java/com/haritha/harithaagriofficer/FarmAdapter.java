@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -23,6 +24,23 @@ public class FarmAdapter extends FirebaseRecyclerAdapter<Farm, FarmAdapter.FarmV
         holder.txt_rv_farmName.setText(model.getFarmName());
         holder.txt_rv_farmDistract.setText(model.getDistrict());
         holder.txt_rv_farmOwner.setText(model.getUserName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, new FarmViewFragment(
+                                model.getUserId(),
+                                model.getFarmName(),
+                                model.getUserName(),
+                                model.getEmail(),
+                                model.getMobile(),
+                                model.getGender(),
+                                model.getDistrict(),
+                                model.getLocation()))
+                        .addToBackStack(null).commit();
+            }
+        });
     }
 
     @NonNull

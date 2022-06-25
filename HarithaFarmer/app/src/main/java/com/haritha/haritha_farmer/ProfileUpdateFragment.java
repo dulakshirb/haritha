@@ -135,7 +135,7 @@ public class ProfileUpdateFragment extends Fragment {
             gender = rb_update_gender_selected.getText().toString();
 
             //update user data in firebase
-            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(name, currentUser.getEmail(), phone, gender, farmName, location, district);
+            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(currentUser.getUid(), name, currentUser.getEmail(), phone, gender, farmName, location, district);
             String userId = currentUser.getUid();
             DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Farmer").child("Users");
 

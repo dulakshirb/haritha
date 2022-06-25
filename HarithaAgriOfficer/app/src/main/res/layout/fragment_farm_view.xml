@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".FarmViewFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/h_gradient_dark_green"
+                android:paddingVertical="20dp">
+
+                <TextView
+                    android:id="@+id/txt_view_farmName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:hint="Loading..."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/el_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/ic_profile"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_baseline_person_24" />
+
+                <TextView
+                    android:id="@+id/txt_view_ownerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/ic_profile"
+                    android:layout_marginStart="50dp"
+                    android:hint="Loading..."
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/txt_view_ownerName"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/h_lightest_gray" />
+
+                <ImageView
+                    android:id="@+id/ic_email"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/view1"
+                    android:background="@drawable/ic_baseline_email_24" />
+
+                <TextView
+                    android:id="@+id/txt_view_farmEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:layout_alignStart="@id/ic_email"
+                    android:layout_marginStart="50dp"
+                    android:hint="Loading..."
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/txt_view_farmEmail"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/h_lightest_gray" />
+
+                <ImageView
+                    android:id="@+id/ic_phone"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_below="@id/view2"
+                    android:background="@drawable/ic_baseline_perm_phone_msg_24" />
+
+                <TextView
+                    android:id="@+id/txt_view_farmPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view2"
+                    android:layout_alignStart="@id/ic_phone"
+                    android:layout_marginStart="50dp"
+                    android:hint="Loading..."
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/txt_view_farmPhone"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/h_lightest_gray" />
+
+                <ImageView
+                    android:id="@+id/ic_gender"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_below="@id/view3"
+                    android:background="@drawable/ic_gender" />
+
+                <TextView
+                    android:id="@+id/txt_view_farmOwnerGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view3"
+                    android:layout_alignStart="@id/ic_gender"
+                    android:layout_marginStart="50dp"
+                    android:hint="Loading..."
+                    android:textSize="18sp" />
+
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/txt_view_farmOwnerGender"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/h_lightest_gray" />
+
+                <ImageView
+                    android:id="@+id/ic_country"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_below="@id/view5"
+                    android:background="@drawable/ic_country" />
+
+                <TextView
+                    android:id="@+id/txt_view_farmDistrict"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view5"
+                    android:layout_alignStart="@id/ic_country"
+                    android:layout_marginStart="50dp"
+                    android:hint="Loading..."
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_view_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_view_farmDistrict"
+                    android:layout_alignStart="@id/ic_country"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Loading..."
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cylinderSells"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="70dp" />
+
+    </ScrollView>
+
+</LinearLayout>
