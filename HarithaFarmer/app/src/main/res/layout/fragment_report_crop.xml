@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="20dp"
+    android:gravity="center_horizontal"
+    tools:context=".ReportCropFragment">
+
+    <TextView
+        android:id="@+id/txt_heading_cropReports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Crop Reports"
+        android:textColor="@color/h_orange"
+        android:textSize="26sp" />
+
+    <Button
+        android:id="@+id/btn_viewRevenueReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_green"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="50dp"
+        android:text="Revenue Report"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_viewCropTypeReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_green"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="50dp"
+        android:text="Crop Types Report"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>
+

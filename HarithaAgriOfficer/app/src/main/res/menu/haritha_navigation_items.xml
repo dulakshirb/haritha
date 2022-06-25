@@ -21,10 +21,10 @@
             android:icon="@drawable/ic_newspaper_svgrepo_com"
             android:title="News" />
 
-        <item
+        <!--<item
             android:id="@+id/nav_Analytics"
             android:icon="@drawable/ic_carbon_agriculture_analytics"
-            android:title="Fertilizing" />
+            android:title="Analytics" />-->
 
         <item
             android:id="@+id/nav_profile"

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context=".ResourcesFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -113,5 +114,118 @@
         </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <TextView
+        android:id="@+id/txt_heading_reports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Reports"
+        android:textColor="@color/h_orange"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/corner_shadow"
+            android:elevation="6dp"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/img_rCrops"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner_shadow"
+                android:src="@drawable/crops_" />
+
+            >
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/corner_shadow"
+            android:elevation="6dp"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/img_rFertilizer"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner_shadow"
+                android:src="@drawable/fertilizer1" />
+
+            >
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/corner_shadow"
+            android:elevation="6dp"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/img_rWatering"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner_shadow"
+                android:src="@drawable/water_" />
+
+            >
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/corner_shadow"
+            android:elevation="6dp"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/img_rSecurity"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner_shadow"
+                android:src="@drawable/bioGas" />
+
+            >
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
