@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ReportCropsRevenueFragment">
+    tools:context=".ReportCropsTypeFragment">
 
-<com.github.mikephil.charting.charts.LineChart
-    android:id="@+id/lineChart_reportCropRevenue"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart_reportCropType"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

@@ -220,7 +220,7 @@
                 android:layout_height="130dp"
                 android:layout_weight="1"
                 android:background="@drawable/corner_shadow"
-                android:src="@drawable/bioGas" />
+                android:src="@drawable/biogas" />
 
             >
         </RelativeLayout>

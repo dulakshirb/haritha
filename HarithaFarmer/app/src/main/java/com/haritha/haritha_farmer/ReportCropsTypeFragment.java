@@ -1,5 +1,6 @@
 package com.haritha.haritha_farmer;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,11 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,21 +24,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ReportCropsRevenueFragment extends Fragment {
+public class ReportCropsTypeFragment extends Fragment {
 
-    LineChart lineChart_reportCrop;
+    PieChart pieChart_reportCropType;
+    int[] colorClassArray = new int[]{Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GREEN, Color.MAGENTA, Color.RED};
     DatabaseReference dbReferenceCrop;
-    LineDataSet lineDataSet = new LineDataSet(null, null);
-    ArrayList<ILineDataSet> iLineDataSets = new ArrayList<>();
-    LineData lineData;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_report_crops_revenue, container, false);
+        View view = inflater.inflate(R.layout.fragment_report_crops_type, container, false);
 
-        lineChart_reportCrop = view.findViewById(R.id.lineChart_reportCropRevenue);
+        pieChart_reportCropType = view.findViewById(R.id.pieChart_reportCropType);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String currentUserID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
@@ -53,17 +52,17 @@ public class ReportCropsRevenueFragment extends Fragment {
         dbReferenceCrop.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Entry> dataValues = new ArrayList<Entry>();
+                ArrayList<PieEntry> dataValues = new ArrayList<>();
 
-                if (snapshot.hasChildren()) {
-                    for (DataSnapshot myDataSnapshot : snapshot.getChildren()) {
+                if(snapshot.hasChildren()){
+                    for (DataSnapshot myDataSnapshot : snapshot.getChildren()){
                         Crop cropData = myDataSnapshot.getValue(Crop.class);
-                        dataValues.add(new Entry(cropData.getDays_to_maturity(), cropData.getEstimated_revenue()));
+                        dataValues.add(new PieEntry(cropData.getEstimated_revenue(), cropData.getCrop_type()));
                     }
                     showChart(dataValues);
-                } else {
-                    lineChart_reportCrop.clear();
-                    lineChart_reportCrop.invalidate();
+                }else {
+                    pieChart_reportCropType.clear();
+                    pieChart_reportCropType.invalidate();
                 }
             }
 
@@ -74,16 +73,13 @@ public class ReportCropsRevenueFragment extends Fragment {
         });
     }
 
-    private void showChart(ArrayList<Entry> dataValues) {
-        lineDataSet.setValues(dataValues);
-        lineDataSet.setLabel("Crop Report");
-        iLineDataSets.clear();
-        iLineDataSets.add(lineDataSet);
-        lineData = new LineData(iLineDataSets);
-        lineChart_reportCrop.clear();
-        lineChart_reportCrop.setData(lineData);
-        lineChart_reportCrop.invalidate();
-    }
+    private void showChart(ArrayList<PieEntry> dataValues) {
+        PieDataSet pieDataSet = new PieDataSet(dataValues, "");
+        pieDataSet.setColors(colorClassArray);
 
+        PieData pieData = new PieData(pieDataSet);
+        pieChart_reportCropType.setData(pieData);
+        pieChart_reportCropType.invalidate();
+    }
 
 }

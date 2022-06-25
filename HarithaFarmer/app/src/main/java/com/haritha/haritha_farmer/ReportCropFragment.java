@@ -30,6 +30,15 @@ public class ReportCropFragment extends Fragment {
             }
         });
 
+        btn_viewCropTypeReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Fragment reportCropsTypeFragment = new ReportCropsTypeFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, reportCropsTypeFragment).addToBackStack(null).commit();
+            }
+        });
+
         return view;
     }
 }
