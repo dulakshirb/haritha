@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(fragment);
                     break;
                 case R.id.nav_watering_and_soilHealth:
+                    fragment = new ControlWateringFragment();
+                            loadFragment(fragment);
                     break;
                 case R.id.nav_reports:
                     fragment = new ReportsFragment();
