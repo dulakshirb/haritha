@@ -27,7 +27,7 @@ import java.util.Objects;
 public class ReportCropsTypeFragment extends Fragment {
 
     PieChart pieChart_reportCropType;
-    int[] colorClassArray = new int[]{Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GREEN, Color.MAGENTA, Color.RED};
+    int[] colorClassArray = new int[]{Color.rgb(45, 94, 92), Color.rgb(232, 117, 53), Color.rgb(252, 204, 121), Color.rgb(212, 186, 185), Color.rgb(108, 108, 172), Color.rgb(44, 68, 76)};
     DatabaseReference dbReferenceCrop;
 
 
@@ -76,6 +76,16 @@ public class ReportCropsTypeFragment extends Fragment {
     private void showChart(ArrayList<PieEntry> dataValues) {
         PieDataSet pieDataSet = new PieDataSet(dataValues, "");
         pieDataSet.setColors(colorClassArray);
+
+        pieChart_reportCropType.setDrawEntryLabels(true);
+        pieChart_reportCropType.setUsePercentValues(false);
+        pieChart_reportCropType.setCenterText("Crop Types");
+        pieChart_reportCropType.setCenterTextSize(16);
+        pieChart_reportCropType.setCenterTextRadiusPercent(50);
+        pieChart_reportCropType.setHoleRadius(30);
+        pieChart_reportCropType.setTransparentCircleRadius(40);
+        pieChart_reportCropType.setTransparentCircleColor(Color.RED);
+        pieChart_reportCropType.setTransparentCircleAlpha(50);
 
         PieData pieData = new PieData(pieDataSet);
         pieChart_reportCropType.setData(pieData);
