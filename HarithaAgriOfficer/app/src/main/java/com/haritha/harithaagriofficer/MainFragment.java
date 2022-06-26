@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -27,6 +28,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -119,6 +121,40 @@ public class MainFragment extends Fragment {
             } else {
                 txt_current_city_name.setText(cityName);
                 getWeatherInfo(city);
+            }
+        });
+
+        ImageView img_rFarm = view.findViewById(R.id.img_rFarm);
+        ImageView img_rNews = view.findViewById(R.id.img_rNews);
+        ImageView img_rSettings = view.findViewById(R.id.img_rSettings);
+
+        img_rFarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment farmFragment = new FarmFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, farmFragment).addToBackStack(null).commit();
+
+            }
+        });
+
+        img_rNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment newsFragment = new NewsFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, newsFragment).addToBackStack(null).commit();
+
+            }
+        });
+
+        img_rSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment profileFragment = new ProfileFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, profileFragment).addToBackStack(null).commit();
+
             }
         });
 

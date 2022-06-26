@@ -71,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new MainFragment();
                     loadFragment(fragment);
                     break;
-                case R.id.nav_task_and_schedule:
+                /*case R.id.nav_task_and_schedule:
                     fragment = new TaskAndScheduleFragment();
                     loadFragment(fragment);
-                    break;
+                    break;*/
                 case R.id.nav_crops:
                     fragment = new CropsFragment();
                     loadFragment(fragment);
@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ResourcesFragment();
                     loadFragment(fragment);
                     break;
-                case R.id.nav_fertilizing:
+               /* case R.id.nav_fertilizing:
                     break;
                 case R.id.nav_seeding:
-                    break;
+                    break;*/
                 case R.id.nav_bio_gas_monitoring:
                     fragment = new BioGasFragment();
                     loadFragment(fragment);

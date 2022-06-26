@@ -59,6 +59,11 @@ void setup() {
 
   //connect to firebase
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  if (Firebase.failed()) {
+      Serial.print("setting /message failed:");
+      Serial.println(Firebase.error());
+      return;
+    }
 
   //default values
   digitalWrite(RED, LOW);

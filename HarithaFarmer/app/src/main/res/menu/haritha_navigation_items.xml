@@ -8,10 +8,10 @@
             android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/home" />
 
-        <item
+        <!--<item
             android:id="@+id/nav_task_and_schedule"
             android:icon="@drawable/ic_baseline_calendar_today_24"
-            android:title="Task &amp; Schedule" />
+            android:title="Task &amp; Schedule" />-->
 
         <item
             android:id="@+id/nav_crops"
@@ -23,7 +23,7 @@
             android:icon="@drawable/ic_mdi_tractor_variant"
             android:title="Resources" />
 
-        <item
+        <!--<item
             android:id="@+id/nav_fertilizing"
             android:icon="@drawable/ic_mdi_nutrition"
             android:title="Fertilizing" />
@@ -31,7 +31,7 @@
         <item
             android:id="@+id/nav_seeding"
             android:icon="@drawable/ic_icon_park_hold_seeds"
-            android:title="Seeding" />
+            android:title="Seeding" />-->
 
         <item
             android:id="@+id/nav_bio_gas_monitoring"

@@ -160,6 +160,82 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_weather"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/corner_shadow"
+                    android:elevation="6dp"
+                    android:padding="10dp">
+
+                    <ImageButton
+                        android:id="@+id/img_rFarm"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner_shadow"
+                        android:src="@drawable/farms" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/corner_shadow"
+                    android:elevation="6dp"
+                    android:padding="10dp">
+
+                    <ImageButton
+                        android:id="@+id/img_rNews"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner_shadow"
+                        android:src="@drawable/news" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/corner_shadow"
+                    android:elevation="6dp"
+                    android:padding="10dp">
+
+                    <ImageButton
+                        android:id="@+id/img_rSettings"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner_shadow"
+                        android:src="@drawable/settings" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 

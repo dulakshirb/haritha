@@ -74,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new MainFragment();
                     loadFragment(fragment);
                     break;
-                case R.id.nav_task_and_schedule:
+                /*case R.id.nav_task_and_schedule:
                     fragment = new TaskAndScheduleFragment();
                     loadFragment(fragment);
-                    break;
+                    break;*/
                 case R.id.nav_farms:
                     fragment = new FarmFragment();
                     loadFragment(fragment);
@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new NewsFragment();
                     loadFragment(fragment);
                     break;
-                case R.id.nav_Analytics:
-                    break;
+                /*case R.id.nav_Analytics:
+                    break;*/
                 case R.id.nav_profile:
                     fragment = new ProfileFragment();
                     loadFragment(fragment);
